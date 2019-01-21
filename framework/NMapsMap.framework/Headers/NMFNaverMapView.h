@@ -1,11 +1,3 @@
-//
-//  NMFNaverMapView.h
-//  dynamic
-//
-//  Created by Won-Young Son on 2018. 9. 13..
-//  Copyright © 2018년 NaverMap. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @class NMFMapView;
@@ -33,8 +25,8 @@ typedef NS_ENUM(NSUInteger, NMFMyPositionMode) {
     NMFMyPositionDirection = 2,
 
     /**
-     위치를 추적하면서 카메라의 좌표와 베어링도 따라 움직이는 모드. `NMFLocationOverlay`와 카메라의 좌표,
-     베어링이 사용자의 위치, 사용자가 바라보고 있는 방향을 따라 움직입니다. API나 제스처를 사용해 지도를 임의로 움직일
+     위치를 추적하면서 카메라의 좌표와 헤딩도 따라 움직이는 모드. `NMFLocationOverlay`와 카메라의 좌표,
+     헤딩이 사용자의 위치, 사용자가 바라보고 있는 방향을 따라 움직입니다. API나 제스처를 사용해 지도를 임의로 움직일
      경우 모드가 `NMFMyPositionNormal`로 바뀝니다.
      */
     NMFMyPositionCompass = 3

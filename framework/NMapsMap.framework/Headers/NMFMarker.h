@@ -100,11 +100,25 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 @property (nonatomic) BOOL isHideCollidedSymbols;
 
 /**
+ 마커와 다른 마커가 겹칠 경우 다른 마커를 숨길지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isHideCollidedMarkers;
+
+/**
  마커와 다른 마커의 캡션이 겹칠 경우 다른 마커의 캡션을 숨길지 여부.
  
  기본값은 `NO`입니다.
  */
 @property (nonatomic) BOOL isHideCollidedCaptions;
+
+/**
+ 마커가 `isHideCollidedMarkers`이 `YES`인 다른 마커와 겹치더라도 아이콘을 무조건 표시할지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isForceShowIcon;
 
 /**
  좌표. 마커를 지도에 추가하기 전에 반드시 이 속성에 값을 지정해야 합니다.
@@ -159,7 +173,7 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 /**
  캡션의 텍스트 크기. pt 단위.
  
- 기본값은 `6`입니다.
+ 기본값은 `12`입니다.
  */
 @property(nonatomic) CGFloat captionTextSize;
 
@@ -196,7 +210,7 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 /**
  보조 캡션의 텍스트 크기. pt 단위.
  
- 기본값은 `6`입니다.
+ 기본값은 `12`입니다.
  */
 @property(nonatomic) CGFloat subCaptionTextSize;
 

@@ -12,13 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NMFLocationOverlay;
-@class NMFStyle;
 @class NMFCameraPosition;
 @class NMFCameraUpdate;
 @class NMFProjection;
-@class NMFIndoorManager;
-@class NMFIndoorView;
-
 
 @protocol NMFMapViewDelegate;
 @protocol NMFPickable;
@@ -81,6 +77,12 @@ typedef NS_ENUM(NSInteger, NMFMapType) {
  */
 NMF_EXPORT IB_DESIGNABLE
 @interface NMFMapView : UIView
+
+/**
+ 지도 인증 요청. 네트워크 오류 등의 이유로 인증을 재시도할 때 호출합니다.
+ @see `NMFAuthManager`
+ */
+- (void)authorize;
 
 #pragma mark Creating Instances
 
@@ -151,12 +153,122 @@ NMF_EXPORT IB_DESIGNABLE
 @property (nonatomic, readonly) double mapHeight;
 
 /**
+ 지도 유형.
+ 
+ 기본값은 `NMFMapTypeBasic`입니다.
+ */
+@property(nonatomic) NMFMapType mapType;
+
+/**
+ 레이어 그룹을 활성화할지 여부를 지정합니다.
+ 
+ @param group 레이어 그룹의 이름.
+ @param enabled 활성화할 경우 `YES`, 그렇지 않을 경우 `NO`입니다.
+ */
+- (void)setLayerGroup:(NSString *)group isEnabled:(BOOL)enabled;
+
+/**
+ 레이어 그룹이 활성화되어 있는지 여부를 반환합니다.
+ 
+ @param group 레이어 그룹의 이름.
+ @return 활성화된 경우 `YES`, 그렇지 않을 경우 `NO`
+ */
+- (BOOL)getLayerGroupEnabled:(NSString *)group;
+
+/**
+ 배경의 명도 계수. 값의 범위는 `-1`~`1`.
+ 계수가 `-1`일 경우 명도 최소치인 검정색으로, `1`일 경우 명도 최대치인 흰색으로 표시됩니다. 오버레이에는 적용되지 않습니다.
+ 
+ 기본값 `0`입니다.
+ */
+@property(nonatomic) CGFloat lightness;
+
+/**
+ 건물의 3D 높이 배율. 값의 범위는 `0`~`1`. 배율이 `0`일 경우 지도를 기울이더라도 건물이 2D로 나타납니다.
+ 
+ 기본값은 `1`입니다.
+ */
+@property(nonatomic) float buildingHeight;
+
+/**
+ 야간 모드를 활성화할지 여부. 야간 모드가 활성화되면 지도 스타일이 어둡게 바뀝니다. 지도 유형이 야간
+ 모드를 지원하지 않으면 활성화하더라도 아무 변화가 일어나지 않습니다.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property(nonatomic, getter=isNightModeEnabled) BOOL nightModeEnabled;
+
+/**
+ 이 지도의 `NMFLocationOverlay` 객체. 항상 같은 객체를 가리킵니다.
+ */
+@property (nonatomic, strong, readonly) NMFLocationOverlay *locationOverlay;
+
+/**
+ 지도의 로캘.
+ 
+ 기본값은 시스템 로캘을 의미하는 `nil`입니다.
+ */
+@property (nonatomic, readwrite, nullable) NSString *locale;
+
+
+/**
+ 네이버 로고의 위치를 지정하는 열거형.
+ @see `NMFMapView.logoAlign`
+ */
+typedef NS_ENUM(NSInteger, NMFLogoAlign) {
+    /** 지도의 좌하단. */
+    NMFLogoAlignLeftBottom = 0,
+    /** 지도의 우하단. */
+    NMFLogoAlignRightBottom,
+    /** 지도의 좌상단. */
+    NMFLogoAlignLeftTop,
+    /** 지도의 우상단. */
+    NMFLogoAlignRightTop
+};
+
+/**
+ 네이버 로고의 위치를 지정합니다.
+ 
+ 기본값은 NMFLogoAlignLeftBottom.
+ */
+@property (nonatomic) NMFLogoAlign logoAlign;
+
+/**
+ 네이버 로고의 마진을 지정합니다.
+ */
+@property (nonatomic) UIEdgeInsets logoMargin;
+
+/**
+ 네이버 로고 클릭을 활성화할지 여부를 지정합니다. 활성화하면 네이버 로고 클릭시 범례, 법적 공지, 오픈소스
+ 라이선스를 보여주는 알림창이 열립니다.
+ 
+ <strong>이 옵션을 `NO`로 지정하는 앱은 반드시 앱 내에 네이버 지도 SDK의 법적 공지
+ (`-showLegalNotice`) 및 오픈소스 라이선스(`-showOpenSourceLicense`)뷰 컨트롤러를 호출하는
+ 메뉴를 만들어야 합니다.</strong>
+ 
+ 기본값은 `YES`입니다.
+ */
+@property (nonatomic) BOOL logoInteractionEnabled;
+
+/**
+ 법적 공지를 보여주는 뷰컨트롤러를 호출합니다.
+ */
+- (void)showLegalNotice;
+
+/**
+ 오픈소스 라이선스를 보여주는 뷰컨트롤러를 호출합니다.
+ */
+- (void)showOpenSourceLicense;
+
+
+/**
  지도가 렌더링되는 속도(fps, frames per second)를 설정합니다.
  
  기본값은 `60`입니다.
  @see `CADisplayLink.preferredFramesPerSecond`
  */
 @property (nonatomic, assign) double preferredFramesPerSecond;
+
 
 #pragma mark Configuring How the User Interacts with the Map
 
@@ -229,58 +341,12 @@ NMF_EXPORT IB_DESIGNABLE
 @property(nonatomic) CGFloat rotateFriction;
 
 /**
- 지도 유형.
- 
- 기본값은 `NMFMapTypeBasic`입니다.
- */
-@property(nonatomic) NMFMapType mapType;
-
-/**
- 배경의 명도 계수. 값의 범위는 `-1`~`1`.
- 계수가 `-1`일 경우 명도 최소치인 검정색으로, `1`일 경우 명도 최대치인 흰색으로 표시됩니다. 오버레이에는 적용되지 않습니다.
- 
- 기본값 `0`입니다.
- */
-@property(nonatomic) CGFloat lightness;
-
-/**
  지도 클릭 시 피킹되는 `NMFPickable`의 클릭 허용 반경. pt 단위. 사용자가 지도를 클릭했을 때, 클릭된 지점이 `NMFPickable`의
  영역 내에 존재하지 않더라도 허용 반경 내에 있다면 해당 요소가 클릭된 것으로 간주됩니다.
  
  기본값은 `2`입니다.
  */
 @property(nonatomic) NSInteger pickTolerance;
-
-/**
- 레이어 그룹을 활성화할지 여부를 지정합니다.
- 
- @param group 레이어 그룹의 이름.
- @param enabled 활성화할 경우 `YES`, 그렇지 않을 경우 `NO`입니다.
- */
-- (void)setLayerGroup:(NSString *)group isEnabled:(BOOL)enabled;
-
-/**
- 레이어 그룹이 활성화되어 있는지 여부를 반환합니다.
- 
- @param group 레이어 그룹의 이름.
- @return 활성화된 경우 `YES`, 그렇지 않을 경우 `NO`
- */
-- (BOOL)getLayerGroupEnabled:(NSString *)group;
-
-/**
- 건물의 3D 높이 배율. 값의 범위는 `0`~`1`. 배율이 `0`일 경우 지도를 기울이더라도 건물이 2D로 나타납니다.
- 
- 기본값은 `1`입니다.
- */
-@property(nonatomic) float buildingHeight;
-
-/**
- 야간 모드를 활성화할지 여부. 야간 모드가 활성화되면 지도 스타일이 어둡게 바뀝니다. 지도 유형이 야간
- 모드를 지원하지 않으면 활성화하더라도 아무 변화가 일어나지 않습니다.
- 
- 기본값은 `NO`입니다.
-*/
-@property(nonatomic, getter=isNightModeEnabled) BOOL nightModeEnabled;
 
 
 #pragma mark Indoor
@@ -301,16 +367,6 @@ NMF_EXPORT IB_DESIGNABLE
 @property(nonatomic) double indoorFocusRadius;
 
 
-/**
- 지도 인증 요청. 네트워크 오류 등의 이유로 인증을 재시도할 때 호출합니다.
- @see `NMFAuthManager`
- */
-- (void)authorize;
-
-/**
- 현재 진행 중인 지도 이동 애니메이션을 취소합니다.
- */
-- (void)cancelTransitions;
 
 #pragma mark Manipulating the Viewpoint
 
@@ -367,6 +423,11 @@ NMF_EXPORT IB_DESIGNABLE
  */
 - (void)moveCamera:(NMFCameraUpdate *)cameraUpdate completion:(nullable void (^)(bool isCancelled))completion;
 
+/**
+ 현재 진행 중인 지도 이동 애니메이션을 취소합니다.
+ */
+- (void)cancelTransitions;
+
 #pragma mark Symbol
 
 /**
@@ -406,17 +467,6 @@ NMF_EXPORT IB_DESIGNABLE
  */
 - (nullable id<NMFPickable>)pick:(CGPoint)point;
 
-/**
- 이 지도의 `NMFLocationOverlay` 객체. 항상 같은 객체를 가리킵니다.
- */
-@property (nonatomic, strong, readonly) NMFLocationOverlay *locationOverlay;
-
-/**
- 지도의 로캘.
- 
- 기본값은 시스템 로캘을 의미하는 `nil`입니다.
- */
-@property (nonatomic, readwrite, nullable) NSString *locale;
 
 @end
 
