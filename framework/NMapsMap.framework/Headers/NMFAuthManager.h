@@ -65,6 +65,11 @@ typedef NS_ENUM(NSInteger, NMFAuthState) {
 @property(nonatomic, nullable) NSString *clientId;
 
 /**
+ 공공기관용 네이버 클라우드 플랫폼 인증을 위한 클라이언트 ID.
+ */
+@property(nonatomic, nullable) NSString *govClientId;
+
+/**
  API 인증 상태.
  */
 @property(nonatomic, readonly) NMFAuthState authState;
