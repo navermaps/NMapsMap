@@ -143,6 +143,13 @@ NMF_EXPORT
 @property (nonatomic) BOOL isForceShowIcon;
 
 /**
+ 마커가 `isHideCollidedCaptions`이 `YES`인 다른 마커와 겹치더라도 캡션을 무조건 표시할지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isForceShowCaption;
+
+/**
  좌표. 마커를 지도에 추가하기 전에 반드시 이 속성에 값을 지정해야 합니다.
  */
 @property (nonatomic, strong) NMGLatLng *position;
