@@ -14,7 +14,7 @@
 - (void)addDelegate:(id<NMFLocationManagerDelegate>)delegate;
 - (void)removeDelegate:(id<NMFLocationManagerDelegate>)delegate;
 
-- (BOOL)locationUpdateAuthorization;
+- (CLAuthorizationStatus)locationUpdateAuthorization;
 
 - (void)startUpdatingLocation;
 - (void)stopUpdatingLocation;
@@ -36,6 +36,8 @@
 
 // Responding to Heading Events
 - (void)locationManager:(NMFLocationManager *)locationManager didUpdateHeading:(CLHeading *)newHeading;
+// Authorization Status Change
+- (void)locationManager:(NMFLocationManager *)locationManager didChangeAuthStatus:(CLAuthorizationStatus)status;
 
 - (void)locationManagerDidStartLocationUpdates:(NMFLocationManager *)locationManager;
 - (void)locationManagerDidStartHeadingUpdates:(NMFLocationManager *)locationManager;
@@ -43,5 +45,6 @@
 - (void)locationManagerBackgroundLocationUpdatesDidAutomaticallyPause:(NMFLocationManager *)locationManager;
 - (void)locationManagerDidStopLocationUpdates:(NMFLocationManager *)locationManager;
 - (void)locationManagerDidStopHeadingUpdates:(NMFLocationManager *)locationManager;
+
 
 @end

@@ -4,6 +4,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ 기본 정보창 전역 Z 인덱스
+ */
+const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
+
 @class NMGLatLng;
 @class NMFMarker;
 @protocol NMFOverlayImageDataSource;
@@ -16,6 +21,16 @@ NS_ASSUME_NONNULL_BEGIN
  노출할 수 있습니다.
  */
 @interface NMFInfoWindow : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_INFO_WINDOW_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
+
 /**
  불투명도. `0`일 경우 완전히 투명, `1`일 경우
  완전히 불투명함을 의미합니다.

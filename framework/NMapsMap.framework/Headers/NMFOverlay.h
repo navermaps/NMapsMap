@@ -133,13 +133,18 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 @property (nonatomic) BOOL hidden;
 
 /**
- z 인덱스. 두 오버레이가 겹쳐진 경우, z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 단, z 인덱스는 동종의 오버레이 간에만 유효합니다. 예를 들어 마커와 지상 오버레이가 겹쳐진 경우에는 z 인덱스가
- 적용되지 않으며, 사전에 정의된 순서대로 마커가 지상 오버레이를 덮습니다.
+ 보조 z 인덱스. 전역 Z 인덱스가 동일한 여러 오버레이가 화면에서 겹쳐지면 보조 Z 인덱스가 큰
+ 오버레이가 작은 오버레이를 덮습니다.
  
  기본값은 `0`입니다.
  */
 @property (nonatomic) NSInteger zIndex;
+
+/**
+ 전역 z 인덱스. 여러 오버레이가 화면에서 겹쳐지면 전역 Z 인덱스가 큰 오버레이가 작은 오버레이를
+ 덮습니다. 또한 값이 `0` 이상이면 오버레이가 심벌 위에, `0` 미만이면 심벌 아래에 그려집니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  오버레이가 보이는 최소 줌 레벨.

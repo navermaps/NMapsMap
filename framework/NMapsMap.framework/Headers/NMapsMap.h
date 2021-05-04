@@ -9,6 +9,7 @@ FOUNDATION_EXPORT NMF_EXPORT double NaverMapFrameworkVersionNumber;
 FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[];
 
 #import "NMapsGeometry.h"
+#import "NMFUtils.h"
 
 #import "NMFAuthManager.h"
 #import "NMFNaverMapView.h"
@@ -29,6 +30,8 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 
 #import "NMFOverlay.h"
 #import "NMFSymbol.h"
+#import "NMFTileId.h"
+#import "NMFTileCoverHelper.h"
 #import "NMFOverlayImage.h"
 #import "NMFGroundOverlay.h"
 #import "NMFLocationOverlay.h"

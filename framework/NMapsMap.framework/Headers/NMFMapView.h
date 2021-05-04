@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NMFPickable;
 
 /**
- 건물 레이어 그룹.
+ 건물 레이어 그룹. 기본적으로 활성화됩니다.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
 extern NSString *const NMF_LAYER_GROUP_BUILDING;
@@ -397,6 +397,23 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
 @property (nonatomic, copy, readonly) NMGPolygon *contentRegion;
 
 /**
+ 현재 화면을 커버하는 타일 ID의 목록을 반환합니다.
+ 
+ @return 타일 ID의 목록
+ @see NMFTileId
+ */
+- (NSArray<NSNumber *> *)getCoveringTileIds;
+
+/**
+ 현재 화면을 커버하는 `zoom` 레벨 타일 ID의 목록을 반환합니다.
+ 
+ @param zoom 줌 레벨.
+ @return 타일 ID의 목록
+ @see NMFTileId
+ */
+- (NSArray<NSNumber *> *)getCoveringTileIdsAtZoom:(NSInteger)zoom;
+
+/**
  지도의 콘텐츠 영역 중심에 대한 카메라 위치.
  */
 @property (nonatomic, copy, readonly) NMFCameraPosition *cameraPosition;
@@ -449,17 +466,17 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
 #pragma mark Pickable Query
 
 /**
- 특정 화면 좌표 주변 `tolerance` 내에 존재하는 모든 오버레이 및 심벌을 가져옵니다. 목록은 가장 위에
+ 특정 화면 좌표 주변 `tolerance` 내에 나타난 모든 오버레이 및 심벌을 가져옵니다. 목록은 가장 위에
  그려진 요소부터 가장 아래에 그려진 요소의 순으로 정렬됩니다.
  
  @param point 화면 좌표.
- @param tolerance  point를 기준으로 한 반경. pt 단위.
- @return 오버레이 및 심벌의 목록. point에 존재하는 오버레이 또는 심벌이 없을 경우 빈 목록.
+ @param tolerance point를 기준으로 한 반경. pt 단위.
+ @return 오버레이 및 심벌의 목록. point 주변 tolerance pt 내에 존재하는 오버레이 또는 심벌이 없을 경우 빈 목록.
  */
 - (NSArray<id<NMFPickable>> *)pickAll:(CGPoint)point withTolerance:(NSInteger)tolerance;
 
 /**
- 특정 화면 좌표에 존재하는 모든 오버레이 및 심벌을 가져옵니다. 목록은 가장 위에 그려진 요소부터 가장 아래에 그려진 요소의 순으로 정렬됩니다.
+ 특정 화면 좌표에 나타난 모든 오버레이 및 심벌을 가져옵니다. 목록은 가장 위에 그려진 요소부터 가장 아래에 그려진 요소의 순으로 정렬됩니다.
  `pickAll(point, 0)`과 동일합니다.
  
  @param point 화면 좌표.

@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 const static int NMF_MARKER_SIZE_AUTO = 0;
 
 /**
+ 기본 마커 전역 Z 인덱스
+ */
+const static int NMF_MARKER_GLOBAL_Z_INDEX = 200000;
+
+/**
  파란색 마커 이미지.
  */
 extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
@@ -43,12 +48,24 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_RED;
  노란색 마커 이미지.
  */
 extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
-
+/**
+ 검은색 마커 이미지. 색상을 덧입히기에 적합합니다.
+ */
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 
 /**
  아이콘과 캡션을 이용해 지도 위의 한 지점을 표시하는 오버레이.
  */
 @interface NMFMarker : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_MARKER_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  사용자가 임의로 지정할 수 있는 태그. 마커를 그루핑하거나 구분하기 위한 목적으로 사용할 수 있습니다.
@@ -59,6 +76,14 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
  아이콘.
  */
 @property (nonatomic, strong) NMFOverlayImage *iconImage;
+
+/**
+ 아이콘에 덧입힐 색상. 덧입힐 색상을 지정하면 덧입힐 색상이 아이콘 이미지의 색상과 가산 혼합됩니다. 단, 덧입힐 색상의
+ 알파는 무시됩니다.
+ 
+ 기본값은 `UIColor.clearColor`입니다.
+ */
+@property (nonatomic, strong) UIColor *iconTintColor;
 
 /**
  아이콘의 너비. pt 단위. `NMF_MARKER_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.

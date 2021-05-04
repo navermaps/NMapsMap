@@ -15,17 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 // As a consequence of this approach, this header must be included in all SDK
 // files that include localizable strings.
 
-#undef NSLocalizedString
-#define NSLocalizedString(key, comment) \
-    [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:nil]
-
-#undef NSLocalizedStringFromTable
-#define NSLocalizedStringFromTable(key, tbl, comment) \
-    [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
-
-#undef NSLocalizedStringWithDefaultValue
-#define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
-    [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:(val) table:(tbl)]
 
 @interface NSBundle (NMFAdditions)
 
@@ -41,5 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, copy, nullable) NSString *naverMapFrameworkResourcesDirectory;
 
 @end
+
+static inline NSString* NMFLocalizedString(NSString *key, NSString * _Nullable comment) {
+    return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:nil];
+}
+
+static inline NSString* NMFLocalizedStringFromTable(NSString *key, NSString *tbl, NSString * _Nullable comment) {
+    return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:(tbl)];
+}
+
+static inline NSString* NMFLocalizedStringWithDefaultValue(NSString *key, NSString * _Nullable tbl, NSBundle * _Nullable bundle, NSString *val, NSString * _Nullable comment) {
+    return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:(val) table:(tbl)];
+}
 
 NS_ASSUME_NONNULL_END

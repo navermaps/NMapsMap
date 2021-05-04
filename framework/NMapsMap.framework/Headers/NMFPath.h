@@ -8,6 +8,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ 기본 경로선 전역 Z 인덱스
+ */
+const static int NMF_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
+
+/**
  지도에 경로선을 나타내는 오버레이. 하나의 선을 나타낸다는 측면에서는 `NMFPolylineOverlay`와 유사하나, 다음과
  같이 경로선에 특화된 특징이 있습니다.
  - 테두리와 패턴 이미지를 적용할 수 있습니다.
@@ -17,6 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
  - 점선 패턴, 끝 지점/연결점의 모양은 지정할 수 없습니다.
  */
 @interface NMFPath : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_PATH_OVERLAY_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  경로선의 색상. 경로선의 색상은 반투명일 수 없으며, 완전히 투명하거나 완전히 불투명해야 합니다. 색상의
