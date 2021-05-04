@@ -4,11 +4,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  An object conforming to the `NMFOfflineRegion` protocol determines which
- resources are required by an `NMFOfflinePack` object. At present, only
- instances of `NMFTilePyramidOfflineRegion` may be used as `NMFOfflinePack`
- regions, but additional conforming implementations may be added in the future.
+ resources are required by an `NMFOfflinePack` object.
  */
 @protocol NMFOfflineRegion <NSObject>
+
+/**
+ URL of the style whose resources are required for offline viewing.
+ 
+ In addition to the JSON stylesheet, different styles may require different font
+ glyphs, sprite sheets, and other resources.
+ 
+ The URL may be a full HTTP or HTTPS URL or a Mapbox URL indicating the style’s
+ map ID (`mapbox://styles/{user}/{style}`).
+ */
+@property (nonatomic, readonly) NSURL *styleURL;
 
 @end
 

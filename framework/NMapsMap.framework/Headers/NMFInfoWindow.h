@@ -29,7 +29,7 @@ const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
  
  기본값은 `NMF_INFO_WINDOW_GLOBAL_Z_INDEX`입니다.
  */
-@property (nonatomic) NSInteger globalZIndex;
+@property(nonatomic) NSInteger globalZIndex;
 
 /**
  불투명도. `0`일 경우 완전히 투명, `1`일 경우
@@ -47,7 +47,7 @@ const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
 /**
  정보 창이 열려 있는 마커.
  */
-@property(nonatomic, readonly) NMFMarker *marker;
+@property(nonatomic, nullable, readonly) NMFMarker *marker;
 
 /**
  좌표. 좌표는 `-openWithMapView:`를 이용해 정보 창을 여는 경우 사용되며, `-openWithMarker:`를

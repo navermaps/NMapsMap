@@ -27,6 +27,12 @@ const static int NMF_POLYGON_OVERLAY_GLOBAL_Z_INDEX = -200000;
 @property (nonatomic) NSInteger globalZIndex;
 
 /**
+ 폴리곤 오버레이의 모양을 결정하는 폴리곤 객체.
+ 폴리곤 오버레이를 생성한 이후 폴리곤을 갱신하기 위한 목적으로 사용할 수 있습니다.
+ */
+@property (nonatomic) NMGPolygon *polygon;
+
+/**
  면의 색상.
  
  기본값은 `UIColor.whiteColor`입니다.
@@ -49,27 +55,32 @@ const static int NMF_POLYGON_OVERLAY_GLOBAL_Z_INDEX = -200000;
 
 /**
  폴리곤 객체와 색상을 지정하여 폴리곤 오버레이를 생성합니다.
+ 폴리곤 객체의 `isValid`속성이 `NO`일 경우 `nil`을 리턴합니다.
 
  @param polygon 폴리곤 객체.
  @param fillColor 폴리곤을 채울 색상.
  @return `NMFPolygonOverlay` 객체.
  */
-+ (instancetype)polygonOverlay:(NMGPolygon *)polygon fillColor:(UIColor *)fillColor;
++ (nullable instancetype)polygonOverlay:(NMGPolygon *)polygon fillColor:(UIColor *)fillColor;
 
 /**
- 폴리곤 객체와 색상을 지정하여 폴리곤 오버레이를 생성합니다.
+ 폴리곤 객체를 지정하여 폴리곤 오버레이를 생성합니다.
+ 폴리곤 객체의 `isValid`속성이 `NO`일 경우 `nil`을 리턴합니다.
 
  @param polygon 폴리곤 객체.
  @return `NMFPolygonOverlay` 객체.
  */
-+ (instancetype)polygonOverlay:(NMGPolygon *)polygon;
++ (nullable instancetype)polygonOverlay:(NMGPolygon *)polygon;
 
 /**
- 폴리곤 오버레이를 생성한 이후 폴리곤을 갱신하기 위한 목적으로 사용할 수 있습니다.
-
- @param polygon 폴리곤 객체.
+ 외곽선 정점 배열을 지정하여 폴리곤 오버레이를 생성합니다.
+ `coords`의 크기는 `2` 이상이어야 합니다.
+ 
+ @param coords `NMGLatLng` 배열.
+ @return `NMFPolygonOverlay` 객체.
  */
-- (void)updatePolygon:(NMGPolygon *)polygon;
++ (nullable instancetype)polygonOverlayWith:(NSArray<NMGLatLng *> *)coords;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -73,7 +73,7 @@ const static int NMF_ARROWHEAD_PATH_OVERLAY_GLOBAL_Z_INDEX = 100000;
  @param points 좌표열.
  @return `NMFArrowheadPath` 객체.
  */
-+ (instancetype)arrowheadPathWithPoints:(NSArray<NMGLatLng *>*)points;
++ (nullable instancetype)arrowheadPathWith:(NSArray<NMGLatLng *>*)points;
 
 @end
 

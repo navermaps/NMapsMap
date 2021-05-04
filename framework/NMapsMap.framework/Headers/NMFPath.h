@@ -81,9 +81,10 @@ const static int NMF_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
 @property (nonatomic) CGFloat outlineWidth;
 
 /**
- 좌표열. `points`의 크기는 `2` 이상이어야 합니다.
+ 경로선 오버레이를 나타내는 `NMGLineString`객체.
+ 경로선 오버레이를 생성한 이후 경로선을 갱신하기 위한 목적으로 사용할 수 있습니다.
  */
-@property (nonatomic, strong) NSArray<NMGLatLng *> *points;
+@property (nonatomic) NMGLineString *path;
 
 /**
  진척률. `0`~`1`로 지정합니다. 경로선에서 `0`~`progress`의 선형은 지나온 경로로 간주되어
@@ -122,7 +123,17 @@ const static int NMF_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  @param coords 좌표열.
  @return `NMFPath` 객체.
  */
-+ (instancetype)pathWithPoints:(NSArray *)coords;
++ (nullable instancetype)pathWithPoints:(NSArray<NMGLatLng *> *)coords;
+
+/**
+ `NMGLineString`을 지정하여 경로선 오버레이를 생성합니다.
+ `NMGLineString`객체의 `isValid`속성이 `NO`일 경우 `nil`을 리턴합니다.
+ 
+ @param path `NMGLineString` 객체.
+ @return `NMFPath` 객체.
+ */
++ (nullable instancetype)pathWithLineString:(NMGLineString *)path;
+
 @end
 
 NS_ASSUME_NONNULL_END

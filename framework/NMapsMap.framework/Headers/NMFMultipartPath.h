@@ -28,31 +28,31 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  
  기본값은 `NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX`입니다.
  */
-@property (nonatomic) NSInteger globalZIndex;
+@property(nonatomic) NSInteger globalZIndex;
 
 /**
- 좌표열 파트의 목록. 목록의 크기가 `1` 이상, 각 파트의 크기가 `2` 이상이어야 합니다.
+ 좌표열 파트의 목록. 목록의 크기가 `1`이상이어야 합니다.
  */
-@property (nonatomic, strong) NSArray<NMGLineString *>* coordParts;
+@property(nonatomic, strong) NSArray<NMGLineString *> *lineParts;
 
 /**
  색상 파트의 목록. 목록의 크기가 `1` 이상, 각 파트의 크기가 `2` 이상이어야 합니다.
  */
-@property (nonatomic, strong) NSArray<NMFPathColor *> *colorParts;
+@property(nonatomic, strong) NSArray<NMFPathColor *> *colorParts;
 
 /**
  두께. pt 단위.
  
  기본값은 `5`입니다.
  */
-@property (nonatomic) CGFloat width;
+@property(nonatomic) CGFloat width;
 
 /**
  테두리 두께. pt 단위.
  
  기본값은 `1`입니다.
  */
-@property (nonatomic) CGFloat outlineWidth;
+@property(nonatomic) CGFloat outlineWidth;
 
 /**
  진척률. `0`~`1`로 지정합니다. 경로선에서 `0`~`progress`의 선형은 지나온 경로로 간주되어
@@ -61,14 +61,14 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  
  기본값은 `0`입니다.
  */
-@property (nonatomic) double progress;
+@property(nonatomic) double progress;
 
 /**
  패턴 이미지의 간격. pt 단위. `0`일 경우 패턴을 표시하지 않습니다.
  
  기본값은 `25`입니다.
  */
-@property (nonatomic) NSUInteger patternInterval;
+@property(nonatomic) NSUInteger patternInterval;
 
 /**
  패턴 이미지. 패턴 이미지의 크기가 경로선의 두께보다 클 경우 경로선의 두께에 맞게 축소됩니다.
@@ -76,16 +76,20 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  
  기본값은 `nil`입니다.
  */
-@property (nonatomic, strong, nullable) NMFOverlayImage *patternIcon;
+@property(nonatomic, strong, nullable) NMFOverlayImage *patternIcon;
 
 /**
  좌표열 파트의 목록을 지정하여 NMFMultipartPath 객체를 생성합니다.
+ 각 파트의 크기는 `2`이상이어야 합니다.
  
  ```
  NMFMultipartPath *mPath = [NMFMultipartPath multipartPathWithCoordParts:@[
-     NMGLatLngMake(37.20, 127.051),
-     NMGLatLngMake(37.21, 127.052),
-     NMGLatLngMake(37.22, 127.053)
+    @[NMGLatLngMake(37.20, 127.051),
+      NMGLatLngMake(37.21, 127.052),
+      NMGLatLngMake(37.22, 127.053)],
+    @[NMGLatLngMake(37.23, 127.054),
+      NMGLatLngMake(37.24, 127.055),
+      NMGLatLngMake(37.25, 127.056)]
  ]];
  mPath.mapView = mapView;
  ```
@@ -93,7 +97,17 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  @param coordParts 좌표열 파트의 목록.
  @return `NMFMultipartPath` 객체.
  */
-+ (instancetype)multipartPathWithCoordParts:(NSArray *)coordParts;
++ (nullable instancetype)multipartPathWith:(NSArray<NSArray<NMGLatLng *> *> *)coordParts;
+
+/**
+ `NMGLineString`배열을 지정하여 NMFMultipartPath 객체를 생성합니다.
+ 배열내 `NMGLineString`객체의 `isValid` 속성이 `NO`일 경우 `nil`을 리턴합니다.
+ 
+ @param lineParts `NMGLineString`파트의 목록.
+ @return `NMFMultipartPath` 객체.
+ */
++ (nullable instancetype)multipartPath:(NSArray<NMGLineString *> *)lineParts;
+
 @end
 
 NS_ASSUME_NONNULL_END

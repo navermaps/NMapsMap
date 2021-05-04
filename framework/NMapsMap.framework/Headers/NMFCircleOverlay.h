@@ -10,6 +10,8 @@
  */
 const static int NMF_CIRCLE_OVERLAY_GLOBAL_Z_INDEX = -200000;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  지도에 원을 나타내는 오버레이.
  */
@@ -22,7 +24,7 @@ const static int NMF_CIRCLE_OVERLAY_GLOBAL_Z_INDEX = -200000;
  
  기본값은 `NMF_CIRCLE_OVERLAY_GLOBAL_Z_INDEX`입니다.
  */
-@property (nonatomic) NSInteger globalZIndex;
+@property(nonatomic) NSInteger globalZIndex;
 
 /**
  중심점. 원을 지도에 추가하기 전에 반드시 이 속성에 값을 지정해야 합니다.
@@ -85,3 +87,5 @@ const static int NMF_CIRCLE_OVERLAY_GLOBAL_Z_INDEX = -200000;
                        radius:(double)radius
                     fillColor:(UIColor *)fillColor;
 @end
+
+NS_ASSUME_NONNULL_END

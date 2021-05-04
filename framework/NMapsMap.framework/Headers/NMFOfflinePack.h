@@ -96,10 +96,24 @@ typedef struct __attribute__((objc_boxable)) NMFOfflinePackProgress {
 /**
  An `NMFOfflinePack` represents a collection of resources necessary for viewing
  a region offline to a local database.
-
+ 
  To create an instance of `NMFOfflinePack`, use the
  `+[NMFOfflineStorage addPackForRegion:withContext:completionHandler:]` method.
  A pack created using `-[NMFOfflinePack init]` is immediately invalid.
+ 
+ ### Example
+ ```swift
+ NMFOfflineStorage.shared.addPack(for: region, withContext: context!) { (pack, error) in
+    guard error == nil else {
+        // If download fails, log the error to the console
+        print("Error: \(error?.localizedDescription ?? "unknown error")")
+        return
+    }
+ 
+    // Start an NMFOfflinePack download
+    pack!.resume()
+ }
+ ```
  */
 NMF_EXPORT
 @interface NMFOfflinePack : NSObject

@@ -111,17 +111,17 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 /**
  오버레이의 고유 ID.
  */
-@property (nonatomic, copy, readonly) NSString *overlayID;
+@property(nonatomic, copy, readonly) NSString *overlayID;
 
 /**
  사용자 임의 속성. 필요에 따라서 부가적인 정보를 저장할 수 있습니다.
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property(nonatomic, strong) NSDictionary *userInfo;
 
 /**
  오버레이를 추가할 지도 객체. `nil`을 지정하면 지도에서 제거됩니다.
  */
-@property (nonatomic, weak, nullable) NMFMapView *mapView;
+@property(nonatomic, weak, nullable) NMFMapView *mapView;
 
 /**
  숨김 속성. `YES`일 경우 오버레이는 화면에 표시되지 않으며 이벤트도 받지 못합니다.
@@ -130,7 +130,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
  
  기본값은 `NO`입니다.
  */
-@property (nonatomic) BOOL hidden;
+@property(nonatomic) BOOL hidden;
 
 /**
  보조 z 인덱스. 전역 Z 인덱스가 동일한 여러 오버레이가 화면에서 겹쳐지면 보조 Z 인덱스가 큰
@@ -138,32 +138,32 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
  
  기본값은 `0`입니다.
  */
-@property (nonatomic) NSInteger zIndex;
+@property(nonatomic) NSInteger zIndex;
 
 /**
  전역 z 인덱스. 여러 오버레이가 화면에서 겹쳐지면 전역 Z 인덱스가 큰 오버레이가 작은 오버레이를
  덮습니다. 또한 값이 `0` 이상이면 오버레이가 심벌 위에, `0` 미만이면 심벌 아래에 그려집니다.
  */
-@property (nonatomic) NSInteger globalZIndex;
+@property(nonatomic) NSInteger globalZIndex;
 
 /**
  오버레이가 보이는 최소 줌 레벨.
  
  기본값은 `NMF_MIN_ZOOM`입니다.
  */
-@property (nonatomic) double minZoom;
+@property(nonatomic) double minZoom;
 
 /**
  오버레이가 보이는 최대 줌 레벨.
  
  기본값은 `NMF_MAX_ZOOM`입니다.
  */
-@property (nonatomic) double maxZoom;
+@property(nonatomic) double maxZoom;
 
 /**
  오버레이가 터치될 경우 호출되는 콜백 블록.
  */
-@property (nonatomic, nullable) NMFOverlayTouchHandler touchHandler;
+@property(nonatomic, nullable) NMFOverlayTouchHandler touchHandler;
 
 /**
  오버레이가 유효하여 지도에 추가될 수 있는지 여부를 반환합니다. `NMFOverlay`를 상속받는 오버레이들은 이 메서드를 재정의할 수 있습니다.

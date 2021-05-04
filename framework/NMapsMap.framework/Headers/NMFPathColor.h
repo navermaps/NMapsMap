@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  NMFPath, NMFMultipartPath의 색상을 지정하는 클래스.
  */
@@ -50,3 +52,5 @@
                        passedColor:(UIColor *)passedColor
                 passedOutlineColor:(UIColor *)passedOutlineColor;
 @end
+
+NS_ASSUME_NONNULL_END

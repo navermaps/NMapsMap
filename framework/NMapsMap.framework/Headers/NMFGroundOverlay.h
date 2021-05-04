@@ -26,26 +26,26 @@ const static int NMF_GROUND_OVERLAY_GLOBAL_Z_INDEX = -300000;
  
  기본값은 `NMF_GROUND_OVERLAY_GLOBAL_Z_INDEX`입니다.
  */
-@property (nonatomic) NSInteger globalZIndex;
+@property(nonatomic) NSInteger globalZIndex;
 
 /**
  영역. 지상 오버레이가 지도에 추가되기 전에 반드시 이 속성을 지정해야 합니다.
  
  기본값은 빈(`isEmpty`가 `YES`인) 영역입니다.
  */
-@property (nonatomic, strong) NMGLatLngBounds *bounds;
+@property(nonatomic, strong) NMGLatLngBounds *bounds;
 
 /**
  이미지.
  */
-@property (nonatomic, strong) NMFOverlayImage *overlayImage;
+@property(nonatomic, strong) NMFOverlayImage *overlayImage;
 
 /**
  불투명도. `0`일 경우 완전히 투명, `1`일 경우 완전히 불투명함을 의미합니다.
  
  기본값은 `1`입니다.
  */
-@property (nonatomic) CGFloat alpha;
+@property(nonatomic) CGFloat alpha;
 
 /**
  영역과 이미지를 지정하여 지상 오버레이를 생성합니다.

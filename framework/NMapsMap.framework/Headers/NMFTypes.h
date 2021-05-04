@@ -7,12 +7,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#ifndef NS_STRING_ENUM
-    #define NS_STRING_ENUM
-    #define NS_EXTENSIBLE_STRING_ENUM
-    typedef NSString *NSErrorDomain;
-    typedef NSString *NSNotificationName;
-#endif
+typedef NSString *NMFExceptionName NS_TYPED_EXTENSIBLE_ENUM;
+
+/**
+ :nodoc: Generic exceptions used across multiple disparate classes. Exceptions
+ that are unique to a class or class-cluster should be defined in those headers.
+ */
+extern NMF_EXPORT NMFExceptionName const NMFAbstractClassException;
 
 /** Indicates an error occurred in the Mapbox SDK. */
 extern NMF_EXPORT NSErrorDomain const NMFErrorDomain;
@@ -33,30 +34,34 @@ typedef NS_ENUM(NSInteger, NMFErrorCode) {
     NMFErrorCodeLoadStyleFailed = 5,
     /** An error occurred while snapshotting the map. */
     NMFErrorCodeSnapshotFailed = 6,
+    /** Source is in use and cannot be removed */
+    NMFErrorCodeSourceIsInUseCannotRemove = 7,
+    /** Source is in use and cannot be removed */
+    NMFErrorCodeSourceIdentifierMismatch = 8
 };
 
 /** Options for enabling debugging features in an `NMFMapView` instance. */
 typedef NS_OPTIONS(NSUInteger, NMFMapDebugMaskOptions) {
     /** Edges of tile boundaries are shown as thick, red lines to help diagnose
-        tile clipping issues. */
+     tile clipping issues. */
     NMFMapDebugTileBoundariesMask = 1 << 1,
     /** Each tile shows its tile coordinate (x/y/z) in the upper-left corner. */
     NMFMapDebugTileInfoMask = 1 << 2,
     /** Each tile shows a timestamp indicating when it was loaded. */
     NMFMapDebugTimestampsMask = 1 << 3,
     /** Edges of glyphs and symbols are shown as faint, green lines to help
-        diagnose collision and label placement issues. */
+     diagnose collision and label placement issues. */
     NMFMapDebugCollisionBoxesMask = 1 << 4,
     /** Each drawing operation is replaced by a translucent fill. Overlapping
-        drawing operations appear more prominent to help diagnose overdrawing.
-        @note This option does nothing in Release builds of the SDK. */
+     drawing operations appear more prominent to help diagnose overdrawing.
+     @note This option does nothing in Release builds of the SDK. */
     NMFMapDebugOverdrawVisualizationMask = 1 << 5,
 #if !TARGET_OS_IPHONE
     /** The stencil buffer is shown instead of the color buffer.
-        @note This option does nothing in Release builds of the SDK. */
+     @note This option does nothing in Release builds of the SDK. */
     NMFMapDebugStencilBufferMask = 1 << 6,
     /** The depth buffer is shown instead of the color buffer.
-        @note This option does nothing in Release builds of the SDK. */
+     @note This option does nothing in Release builds of the SDK. */
     NMFMapDebugDepthBufferMask = 1 << 7,
 #endif
 };
@@ -76,12 +81,16 @@ typedef struct __attribute__((objc_boxable)) NMFTransition {
     NSTimeInterval delay;
 } NMFTransition;
 
+NS_INLINE NSString *NMFStringFromNMFTransition(NMFTransition transition) {
+    return [NSString stringWithFormat:@"transition { duration: %f, delay: %f }", transition.duration, transition.delay];
+}
+
 /**
  Creates a new `NMFTransition` from the given duration and delay.
  
- @param duration The amount of time the animation should take, not including 
+ @param duration The amount of time the animation should take, not including
  the delay.
- @param delay The amount of time in seconds to wait before beginning the 
+ @param delay The amount of time in seconds to wait before beginning the
  animation.
  
  @return Returns a `NMFTransition` struct containing the transition attributes.
