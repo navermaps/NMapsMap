@@ -1,11 +1,13 @@
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#import "NMFFoundation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  NMFPath, NMFMultipartPath의 색상을 지정하는 클래스.
  */
+NMF_EXPORT
 @interface NMFPathColor : NSObject
 
 /**

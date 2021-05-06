@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 
+#import "NMFFoundation.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class NMFMapView;
@@ -7,6 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  축척 바 컨트롤.
  */
+NMF_EXPORT
 @interface NMFScaleView : UIView
 
 /**

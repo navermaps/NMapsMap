@@ -26,6 +26,7 @@ const static double NMG_TM128_MAXIMUM_Y = 643904.8888573726;
 /**
  TM-128 좌표를 표현하는 클래스.
  */
+NMF_EXPORT
 @interface NMGTm128 : NSObject <NMGPointable>
 
 /**

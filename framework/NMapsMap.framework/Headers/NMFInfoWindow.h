@@ -21,6 +21,7 @@ const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
  - 고정된 이미지를 지정하는 마커와 달리 이미지를 반환하는 어댑터를 지정할 수 있으므로, 객체/상황별로 다른 이미지를
  노출할 수 있습니다.
  */
+NMF_EXPORT
 @interface NMFInfoWindow : NMFOverlay
 
 /**

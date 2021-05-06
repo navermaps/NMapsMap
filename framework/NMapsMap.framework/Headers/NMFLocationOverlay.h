@@ -33,6 +33,7 @@ const static int NMF_LOCATION_OVERLAY_GLOBAL_Z_INDEX = 300000;
  - 보조 아이콘: 생략할 수 있습니다. 주 아이콘보다 약간 아래에 그려집니다. 이벤트를 받을 수 없습니다.
  - 원: 생략할 수 있습니다. 강조 효과를 위해 사용되며, 보조 아이콘 아래에 그려집니다. 이벤트를 받을 수 없습니다.
  */
+NMF_EXPORT
 @interface NMFLocationOverlay : NMFOverlay
 
 /**

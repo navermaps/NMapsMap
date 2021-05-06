@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+#import "NMFFoundation.h"
 #import "NMFMyPositionMode.h"
 
 @class NMFMapView;
@@ -9,6 +10,7 @@
 /**
  지도의 컨트롤을 내장한 지도 뷰 클래스.
  */
+NMF_EXPORT
 @interface NMFNaverMapView : UIView
 
 /**

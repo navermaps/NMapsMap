@@ -11,6 +11,7 @@
 /**
  평면 직교 좌표계상의 한 점을 나타내는 클래스.
  */
+NMF_EXPORT
 @interface NMGPoint : NSObject <NMGPointable>
 
 @property (nonatomic) double x;

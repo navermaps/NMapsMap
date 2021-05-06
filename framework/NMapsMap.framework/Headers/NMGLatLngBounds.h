@@ -15,6 +15,7 @@
  <a href="https://terms.naver.com/entry.nhn?docId=3479529&amp;cid=58439&amp;categoryId=58439">최소 경계 사각형</a>
  영역을 나타내는 클래스.
  */
+NMF_EXPORT
 @interface NMGLatLngBounds : NSObject <NMGBoundable>
 
 /**

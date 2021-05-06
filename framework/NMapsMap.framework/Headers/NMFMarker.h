@@ -24,39 +24,40 @@ const static int NMF_MARKER_GLOBAL_Z_INDEX = 200000;
 /**
  파란색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
 /**
  회색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
 /**
  초록색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
 /**
  밝은파란색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
 /**
  핑크색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
 /**
  빨간색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_RED;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_RED;
 /**
  노란색 마커 이미지.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 /**
  검은색 마커 이미지. 색상을 덧입히기에 적합합니다.
  */
-extern NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 
 /**
  아이콘과 캡션을 이용해 지도 위의 한 지점을 표시하는 오버레이.
  */
+NMF_EXPORT
 @interface NMFMarker : NMFOverlay
 
 /**

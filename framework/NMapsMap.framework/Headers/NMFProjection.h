@@ -1,6 +1,7 @@
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
+
+#import "NMFFoundation.h"
 
 @class NMFMapView;
 @class NMGLatLng;
@@ -12,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  지리적 좌표와 화면 좌표 간의 변환을 담당하는 클래스. 이 클래스의 인스턴스는 직접 생성할 수 없고
  `NMFMapView.projection`을 이용해서 가져올 수 있습니다.
  */
+NMF_EXPORT
 @interface NMFProjection : NSObject
 
 /**
@@ -28,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param point 화면 좌표.
  @param zoom 줌 레벨.
  @param tilt 틸트 각도.
- @param bearing 베어링 각도.
+ @param heading 헤딩 각도.
  @param wrap 좌표를 랩핑할지 여부.
  @return 위경도 좌표. `point`가 `nil`이거나 화면 좌표의 범위가 위경도 좌표로 표현할 수 있는 범위를 벗어난 경우 유효하지 않은(`NMGLatLng.isValid()`가 `NO`인) 좌표가 반환됩니다.
  */
@@ -48,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param coord 위경도 좌표.
  @param zoom 줌 레벨.
  @param tilt 틸트 각도.
- @param bearing 베어링 각도.
+ @param heading 헤딩 각도.
  @param shortestPath 가까운 좌표를 사용할지 여부.
  @return 화면 좌표. `coord`가 `nil`이거나, 위경도 좌표의 범위가 화면 좌표로 표현할 수 있는 범위를 벗어난 경우 유효하지 않은(`CGPoint.x` 또는 `CGPoint.y`가 무한대인) 좌표가 반환됩니다.
  */

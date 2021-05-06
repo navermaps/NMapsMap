@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see `NMFCameraUpdate.cameraUpdateWithParams:`
  */
+NMF_EXPORT
 @interface NMFCameraUpdateParams : NSObject
 
 @property(nonatomic, readonly) bool isScrolled;

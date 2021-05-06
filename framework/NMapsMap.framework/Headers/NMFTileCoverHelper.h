@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+#import "NMFFoundation.h"
 
 @class NMFMapView;
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  전체 타일 대신 변경사항이 있는 타일만을 처리하면 되므로 `-getCoveringTileIds`를 직접 사용하는 것에
  비해 효율적입니다.
  */
-
+NMF_EXPORT
 @interface NMFTileCoverHelper : NSObject
 
 /**

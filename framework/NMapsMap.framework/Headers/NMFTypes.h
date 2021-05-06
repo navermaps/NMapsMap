@@ -37,7 +37,13 @@ typedef NS_ENUM(NSInteger, NMFErrorCode) {
     /** Source is in use and cannot be removed */
     NMFErrorCodeSourceIsInUseCannotRemove = 7,
     /** Source is in use and cannot be removed */
-    NMFErrorCodeSourceIdentifierMismatch = 8
+    NMFErrorCodeSourceIdentifierMismatch = 8,
+    /** An error occurred while modifying the offline storage database */
+    NMFErrorCodeModifyingOfflineStorageFailed = 9,
+    /** Source is invalid and cannot be removed from the style (e.g. after a style change) */
+    NMFErrorCodeSourceCannotBeRemovedFromStyle  = 10,
+    /** An error occurred while rendering */
+    NMFErrorCodeRenderingError = 11,
 };
 
 /** Options for enabling debugging features in an `NMFMapView` instance. */

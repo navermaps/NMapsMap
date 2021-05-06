@@ -6,8 +6,9 @@
 //  Copyright © 2017년 NAVER. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+
+#import "NMFFoundation.h"
 
 #pragma mark NMGGeometry Protocol
 

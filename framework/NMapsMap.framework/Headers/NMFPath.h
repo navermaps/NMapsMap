@@ -22,6 +22,7 @@ const static int NMF_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  - 진척률을 지정할 수 있으며, 지나온/지나갈 경로에 각각 다른 색상과 테두리를을 지정할 수 있습니다.
  - 점선 패턴, 끝 지점/연결점의 모양은 지정할 수 없습니다.
  */
+NMF_EXPORT
 @interface NMFPath : NMFOverlay
 
 /**

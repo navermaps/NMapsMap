@@ -26,6 +26,7 @@ const static double NMG_UTMK_MAXIMUM_Y = 2619635;
 /**
  UTMK 좌표를 표현하는 클래스.
  */
+NMF_EXPORT
 @interface NMGUtmk : NSObject <NMGPointable>
 
 /**

@@ -15,6 +15,7 @@
 /**
  지오메트리와 관련된 유틸리티 기능을 제공하는 클래스.
  */
+NMF_EXPORT
 @interface NMGUtils : NSObject
 
 /**

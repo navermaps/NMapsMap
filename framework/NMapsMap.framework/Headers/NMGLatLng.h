@@ -36,6 +36,7 @@ const static double NMG_LAT_LNG_MAXIMUM_LONGITUDE   = 180;
  
  `CLLocationCoordinate2D`과 달리 위도와 경도를 `double`형으로 표현합니다.
  */
+NMF_EXPORT
 @interface NMGLatLng : NSObject <NMGPointable>
 
 /**

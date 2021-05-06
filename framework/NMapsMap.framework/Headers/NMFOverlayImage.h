@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "NMFFoundation.h"
 
 @class NMFOverlay;
 
@@ -8,6 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  오버레이에서 사용하는 비트맵 이미지를 나타내는 불변 클래스. 팩토리 메서드를 이용해
  asset, `UIImage`, `NSBundle` 등으로부터 인스턴스를 생성할 수 있습니다.
  */
+NMF_EXPORT
 @interface NMFOverlayImage : NSObject
 
 /**

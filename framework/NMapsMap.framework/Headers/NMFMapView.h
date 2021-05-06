@@ -25,58 +25,58 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  기본 밝은 배경색.
  */
-extern UIColor *const NMFDefaultBackgroundLightColor;
+extern NMF_EXPORT UIColor *const NMFDefaultBackgroundLightColor;
 
 /**
  기본 어두운 배경색.
  */
-extern UIColor *const NMFDefaultBackgroundDarkColor;
+extern NMF_EXPORT UIColor *const NMFDefaultBackgroundDarkColor;
 
 /**
  기본 밝은 배경 이미지.
  */
-extern UIImage *const NMFDefaultBackgroundLightImage;
+extern NMF_EXPORT UIImage *const NMFDefaultBackgroundLightImage;
 
 /**
  기본 어두운 배경 이미지.
  */
-extern UIImage *const NMFDefaultBackgroundDarkImage;
+extern NMF_EXPORT UIImage *const NMFDefaultBackgroundDarkImage;
 
 /**
  건물 레이어 그룹. 기본적으로 활성화됩니다.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_BUILDING;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_BUILDING;
 
 /**
  대중교통 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_TRANSIT;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_TRANSIT;
 
 /**
  자전거도로 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_BICYCLE;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_BICYCLE;
 
 /**
  실시간 교통정보 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_TRAFFIC;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_TRAFFIC;
 
 /**
  지적편집도 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_CADASTRAL;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_CADASTRAL;
 
 /**
  등산로 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NSString *const NMF_LAYER_GROUP_MOUNTAIN;
+extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_MOUNTAIN;
 
 /**
  지도 유형을 나타내는 열거형.
@@ -188,11 +188,6 @@ NMF_EXPORT IB_DESIGNABLE
  지도의 배경 이미지. 배경은 해당 지역의 지도 데이터가 없거나 로딩 중일 때 나타납니다.
  */
 @property (nonatomic, nullable) UIImage *backgroundImage;
-
-/**
- 지도 콘텐츠 영역에 대한 `NMGLatLngBounds`.
- */
-@property (nonatomic, readonly, copy) NMGLatLngBounds *contentBounds;
 
 /**
  지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다. 따라서 패딩을 변경하면 비록 화면에 나타나는 지도의 모습은 변하지 않지만
@@ -458,31 +453,48 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
 @property (nonatomic, nullable) NMGLatLngBounds *extent;
 
 /**
- 지도의 콘텐츠 영역에 대한 폴리곤 객체.
+ 지도의 콘텐츠 영역 중심에 대한 카메라 위치.
+ */
+@property (nonatomic, copy, readonly) NMFCameraPosition *cameraPosition;
+
+/**
+ 지도의 콘텐츠 영역에 대한 `NMGLatLngBounds`.  콘텐츠 패딩이 모두 `0`이면 `coveringBounds`와 동일한 영역이,
+ 콘텐츠 패딩이 지정되어 있으면 `coveringBounds`에서 콘텐츠 패딩을 제외한 영역이 반환됩니다.
+ */
+@property (nonatomic, readonly, copy) NMGLatLngBounds *contentBounds;
+
+/**
+ 지도의 콘텐츠 영역에 대한 폴리곤 객체.  콘텐츠 패딩이 모두 `0`이면 `coveringRegion`과 동일한 폴리곤이,
+ 콘텐츠 패딩이 지정되어 있으면 `coveringRegion`에서 콘텐츠 패딩을 제외한 폴리곤이 반환됩니다.
  */
 @property (nonatomic, copy, readonly) NMGPolygon *contentRegion;
 
 /**
- 현재 화면을 커버하는 타일 ID의 목록을 반환합니다.
+ 콘텐츠 패딩을 포함한 지도의 뷰 전체 영역에 대한 `NMGLatLngBounds`.
+ */
+@property (nonatomic, readonly, copy) NMGLatLngBounds *coveringBounds;
+
+/**
+ 콘텐츠 패딩을 포함한 지도의 뷰 전체 영역에 대한 폴리곤 객체.
+ */
+@property (nonatomic, copy, readonly) NMGPolygon *coveringRegion;
+
+/**
+ 콘텐츠 패딩을 포함한 지도의 뷰 전체를 완전히 덮는 타일 ID의 목록을 반환합니다.
  
- @return 타일 ID의 목록
+ @return 타일 ID의 목록.
  @see NMFTileId
  */
 - (NSArray<NSNumber *> *)getCoveringTileIds;
 
 /**
- 현재 화면을 커버하는 `zoom` 레벨 타일 ID의 목록을 반환합니다.
+ 콘텐츠 패딩을 포함한 지도의 뷰 전체를 완전히 덮는 `zoom` 레벨 타일 ID의 목록을 반환합니다.
  
  @param zoom 줌 레벨.
- @return 타일 ID의 목록
+ @return 타일 ID의 목록.
  @see NMFTileId
  */
 - (NSArray<NSNumber *> *)getCoveringTileIdsAtZoom:(NSInteger)zoom;
-
-/**
- 지도의 콘텐츠 영역 중심에 대한 카메라 위치.
- */
-@property (nonatomic, copy, readonly) NMFCameraPosition *cameraPosition;
 
 /**
  이 지도에 대한 `NMFProjection` 객체. 항상 같은 객체가 반환됩니다.

@@ -1,11 +1,14 @@
+#import "NMFOverlayImage.h"
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIkit.h>
+
+#import "NMFFoundation.h"
 
 @protocol NMFOverlayImageDataSource;
 
 NS_ASSUME_NONNULL_BEGIN
 
+NMF_EXPORT
 @interface NMFInfoWindowDefaultTextSource : NSObject <NMFOverlayImageDataSource>
 
 + (instancetype)dataSource;

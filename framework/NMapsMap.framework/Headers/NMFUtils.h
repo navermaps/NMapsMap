@@ -19,6 +19,7 @@ NS_INLINE CGFloat ScreenScaleFactor() {
 /**
  지오메트리 관련 유틸리티를 제공하는 클래스.
  */
+NMF_EXPORT
 @interface NMFGeometryUtils : NSObject
 
 /**
@@ -45,6 +46,7 @@ NS_INLINE CGFloat ScreenScaleFactor() {
 /**
  카메라 관련 유틸리티를 제공하는 클래스.
  */
+NMF_EXPORT
 @interface NMFCameraUtils : NSObject
 
 /**

@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 
+#import "NMFFoundation.h"
+
 #define COMPASSVIEW_DEFAULT_SIZE        50
 #define COMPASSVIEW_DEFAULT_HEADING     0.0
 #define COMPASSVIEW_DEFAULT_TILTING     0.0
@@ -11,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  나침반 컨트롤.
  */
+NMF_EXPORT
 @interface NMFCompassView : UIImageView
 
 /**

@@ -1,11 +1,11 @@
-
-#import <Foundation/Foundation.h>
+#import "NMFFoundation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  하나의 실내지도를 나타내는 불변 클래스.
  */
+NMF_EXPORT
 @interface NMFIndoorView : NSObject
 
 /**

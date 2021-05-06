@@ -20,6 +20,7 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  `MultipartPathOverlay`는 좌표열 파트의 목록와 색상 파트의 목록으로 구성되며, `0`번째 좌표열 파트에
  `0`번째 색상 파트의 색상이 적용됩니다. 따라서 좌표열 파트와 색상 파트의 크기가 동일해야 합니다.
  */
+NMF_EXPORT
 @interface NMFMultipartPath : NMFOverlay
 
 /**

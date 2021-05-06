@@ -1,4 +1,3 @@
-
 #import "NMFIndoorView.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -9,6 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see `NMFIndoorZone`
  */
+NMF_EXPORT
 @interface NMFIndoorLevel : NSObject
 
 /**

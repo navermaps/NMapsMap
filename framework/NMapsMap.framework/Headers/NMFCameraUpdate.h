@@ -1,7 +1,7 @@
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#import "NMFFoundation.h"
 #import "NMapsGeometry.h"
 
 @class NMFCameraUpdateParams;
@@ -77,6 +77,7 @@ typedef NS_ENUM(NSUInteger, NMFCameraUpdateAnimation) {
  - 이동 원인: 카메라 이동의 원인. 이 값을 지정하면 `NMFMapViewCameraDelegate`의 메서드에 `reason` 파라미터로 전달됩니다. `reason`으로 지정합니다.
  @see `NMFMapView` `-moveCamera:`
  */
+NMF_EXPORT
 @interface NMFCameraUpdate : NSObject
 
 /**

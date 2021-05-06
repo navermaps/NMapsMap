@@ -15,6 +15,7 @@ const static int NMF_ARROWHEAD_PATH_OVERLAY_GLOBAL_Z_INDEX = 100000;
  화살표 형태로 방향 또는 회전 지점을 나타내는 오버레이. 경로선 오버레이와 마찬가지로 좌표열을 나타내지만 진척률을
  지정할 수 없고, 끝 지점에 삼각형 모양의 머리가 추가됩니다.
  */
+NMF_EXPORT
 @interface NMFArrowheadPath : NMFOverlay
 
 /**

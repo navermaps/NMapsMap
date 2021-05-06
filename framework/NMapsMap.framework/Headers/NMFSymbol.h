@@ -12,6 +12,7 @@
  
  - SeeAlso: `NMFPickable`
  */
+NMF_EXPORT
 @interface NMFSymbol : NSObject <NMFPickable>
 
 /**

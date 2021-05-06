@@ -13,6 +13,7 @@
  두 점의 집합.
  PointType에 따라 Point, LatLng로 동작합니다.
  */
+NMF_EXPORT
 @interface NMGSegment<__covariant PointType> : NSObject <NMGGeometry>
 
 /**

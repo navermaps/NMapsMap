@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  지도에 선을 나타내는 오버레이.
  */
+NMF_EXPORT
 @interface NMFPolylineOverlay : NMFOverlay
 
 /**

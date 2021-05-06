@@ -27,6 +27,7 @@ const static double NMG_WEB_MERCATOR_MAXIMUM_LATITUDE = 85.05112877980659;
 /**
  웹 메르카토르 좌표를 표현하는 클래스.
  */
+NMF_EXPORT
 @interface NMGWebMercatorCoord : NSObject <NMGPointable>
 
 /**

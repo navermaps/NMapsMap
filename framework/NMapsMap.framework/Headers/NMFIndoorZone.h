@@ -1,5 +1,5 @@
+#import "NMFFoundation.h"
 
-#import <Foundation/Foundation.h>
 @class NMFIndoorLevel;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see `NMFIndoorRegion`
  */
+NMF_EXPORT
 @interface NMFIndoorZone : NSObject
 
 /**

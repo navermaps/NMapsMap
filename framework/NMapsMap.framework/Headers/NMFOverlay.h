@@ -65,6 +65,7 @@ typedef NS_ENUM(NSInteger, NMFAlign) {
  오버레이를 어느 방향으로 정렬할지 나타내는 객체.
  속성 객체로만 사용해야 합니다.
  */
+NMF_EXPORT
 @interface NMFAlignType : NSObject <NSSecureCoding, NSCopying>
 
 /**
@@ -171,6 +172,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 /**
  지도에 오버레이되는 요소를 나타내는 최상위 클래스. 대부분의 오버레이는 `mapView`를 사용해 동적으로 지도에 추가하거나 지도로부터 제거할 수 있습니다.
  */
+NMF_EXPORT
 @interface NMFOverlay : NSObject <NMFPickable>
 
 /**

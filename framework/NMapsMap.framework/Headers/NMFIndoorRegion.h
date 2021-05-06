@@ -1,13 +1,14 @@
-
-#import <Foundation/Foundation.h>
+#import "NMFFoundation.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @class NMFIndoorZone;
 
 /**
  실내지도가 존재하는 영역을 나타내는 불변 클래스. 하나의 실내지도 영역은 서로 겹쳐진 한 개 이상의 구역으로 이루어집니다.
  이 클래스의 인스턴스는 직접 생성할 수 없습니다.
  */
+NMF_EXPORT
 @interface NMFIndoorRegion : NSObject
 
 /**

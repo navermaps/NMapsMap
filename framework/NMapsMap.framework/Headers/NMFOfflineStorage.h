@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
  whenever any field in the `progress` property changes.
  
  The `object` is the `NMFOfflinePack` object whose progress changed. The
- `userInfo` dictionary contains the pack’s current state in the
- `NMFOfflinePackStateUserInfoKey` key and details about the pack’s current
+ `NMFOfflinePackUserInfoKeyState` key and details about the pack’s current
+ progress in the `NMFOfflinePackUserInfoKeyProgress` key. You may also consult
  progress in the `NMFOfflinePackProgressUserInfoKey` key. You may also consult
  the `NMFOfflinePack.state` and `NMFOfflinePack.progress` properties, which
  provide the same values.
@@ -44,7 +44,7 @@ extern NMF_EXPORT const NSNotificationName NMFOfflinePackProgressChangedNotifica
 
  The `object` is the `NMFOfflinePack` object that encountered the error. The
  `userInfo` dictionary contains the error object in the
- `NMFOfflinePackErrorUserInfoKey` key.
+ `NMFOfflinePackUserInfoKeyError` key.
  */
 extern NMF_EXPORT const NSNotificationName NMFOfflinePackErrorNotification;
 
@@ -54,12 +54,11 @@ extern NMF_EXPORT const NSNotificationName NMFOfflinePackErrorNotification;
 
  The `object` is the `NMFOfflinePack` object that reached the tile limit in the
  course of downloading. The `userInfo` dictionary contains the tile limit in the
- `NMFOfflinePackMaximumCountUserInfoKey` key.
+ `NMFOfflinePackUserInfoKeyMaximumCount` key.
 
  Once this limit is reached, no instance of `NMFOfflinePack` can download
  additional tiles from Mapbox APIs until already downloaded tiles are removed by
  calling the `-[NMFOfflineStorage removePack:withCompletionHandler:]` method.
- Contact your Mapbox sales representative to have the limit raised.
  */
 extern NMF_EXPORT const NSNotificationName NMFOfflinePackMaximumTilesReachedNotification;
 
@@ -76,8 +75,6 @@ typedef NSString *NMFOfflinePackUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
  */
 extern NMF_EXPORT const NMFOfflinePackUserInfoKey NMFOfflinePackUserInfoKeyState;
 
-extern NMF_EXPORT NSString * const NMFOfflinePackStateUserInfoKey __attribute__((deprecated("Use NMFOfflinePackUserInfoKeyState")));
-
 /**
  The key for an `NSValue` object that indicates an offline pack’s current
  progress. This key is used in the `userInfo` dictionary of an
@@ -87,8 +84,6 @@ extern NMF_EXPORT NSString * const NMFOfflinePackStateUserInfoKey __attribute__(
  */
 extern NMF_EXPORT const NMFOfflinePackUserInfoKey NMFOfflinePackUserInfoKeyProgress;
 
-extern NMF_EXPORT NSString * const NMFOfflinePackProgressUserInfoKey __attribute__((deprecated("Use NMFOfflinePackUserInfoKeyProgress")));
-
 /**
  The key for an `NSError` object that is encountered in the course of
  downloading an offline pack. This key is used in the `userInfo` dictionary of
@@ -96,8 +91,6 @@ extern NMF_EXPORT NSString * const NMFOfflinePackProgressUserInfoKey __attribute
  `NMFErrorDomain`. See `NMFErrorCode` for possible error codes.
  */
 extern NMF_EXPORT const NMFOfflinePackUserInfoKey NMFOfflinePackUserInfoKeyError;
-
-extern NMF_EXPORT NSString * const NMFOfflinePackErrorUserInfoKey __attribute__((deprecated("Use NMFOfflinePackUserInfoKeyError")));
 
 /**
  The key for an `NSNumber` object that indicates the maximum number of
@@ -182,9 +175,9 @@ typedef NS_ENUM(NSUInteger, NMFResourceKind) {
 
 /**
  NMFOfflineStorage implements a singleton (shared object) that manages offline
- packs. All of this class’s instance methods are asynchronous, reflecting the
- fact that offline resources are stored in a database. The shared object
- maintains a canonical collection of offline packs in its `packs` property.
+ packs and ambient caching. All of this class’s instance methods are asynchronous,
+ reflecting the fact that offline resources are stored in a database. The shared
+ object maintains a canonical collection of offline packs in its `packs` property.
  
  #### Related examples
  See the <a href="https://docs.mapbox.com/ios/maps/examples/offline-pack/">
@@ -315,6 +308,20 @@ NMF_EXPORT
 - (void)removePack:(NMFOfflinePack *)pack withCompletionHandler:(nullable NMFOfflinePackRemovalCompletionHandler)completion;
 
 /**
+ Invalidates the specified offline pack. This method checks that the tiles
+ in the specified offline pack match those from the server. Local tiles that
+ do not match the latest version on the server are updated.
+ 
+ This is more efficient than deleting the offline pack and downloading it
+ again. If the data stored locally matches that on the server, new data will
+ not be downloaded.
+ 
+ @param pack The offline pack to be invalidated.
+ @param completion The completion handler to call once the pack has been
+ removed. This handler is executed asynchronously on the main queue.
+ */
+- (void)invalidatePack:(NMFOfflinePack *)pack withCompletionHandler:(void (^)(NSError * _Nullable))completion;
+/**
  Forcibly, asynchronously reloads the `packs` property. At some point after this
  method is called, the pointer values of the `NMFOfflinePack` objects in the
  `packs` property change, even if the underlying data for these packs has not
@@ -354,6 +361,71 @@ NMF_EXPORT
  */
 @property (nonatomic, readonly) unsigned long long countOfBytesCompleted;
 
+#pragma mark - Managing Ambient Cache
+
+/**
+ Sets the maximum ambient cache size in bytes. The default maximum cache
+ size is 50 MB. To disable ambient caching, set the maximum ambient cache size
+ to `0`. Setting the maximum ambient cache size does not impact the maximum size
+ of offline packs.
+ 
+ While this method does not limit the space available to offline packs,
+ data in offline packs count towards this limit. If the maximum ambient
+ cache size is set to 30 MB and 20 MB of offline packs are downloaded,
+ there may be only 10 MB reserved for the ambient cache.
+ 
+ This method should be called before the map and map style have been loaded.
+ 
+ This method is potentially expensive, as the database will trim cached data
+ in order to prevent the ambient cache from being larger than the
+ specified amount.
+ 
+ @param cacheSize The maximum size in bytes for the ambient cache.
+ @param completion The completion handler to call once the maximum ambient cache size
+ has been set. This handler is executed synchronously on the main queue.
+ */
+
+- (void)setMaximumAmbientCacheSize:(NSUInteger)cacheSize withCompletionHandler:(void (^)(NSError *_Nullable error))completion;
+
+/**
+ Invalidates the ambient cache. This method checks that the tiles in the
+ ambient cache match those from the server. If the local tiles do not match
+ those on the server, they are re-downloaded.
+ 
+ This is recommended over clearing the cache or resetting the database
+ because valid local tiles will not be downloaded again.
+ 
+ Resources shared with offline packs will not be affected by this method.
+ 
+ @param completion The completion handler to call once the ambient cache has
+ been revalidated. This handler is executed asynchronously on the main queue.
+ */
+
+- (void)invalidateAmbientCacheWithCompletionHandler:(void (^)(NSError *_Nullable error))completion;
+
+/**
+ Clears the ambient cache by deleting resources. This method does not
+ affect resources shared with offline regions.
+ 
+ @param completion The completion handler to call once resources from
+ the ambient cache have been cleared. This handler is executed
+ asynchronously on the main queue.
+ */
+
+- (void)clearAmbientCacheWithCompletionHandler:(void (^)(NSError *_Nullable error))completion;
+
+/**
+ Deletes the existing database, which includes both the ambient cache and offline packs,
+ then reinitializes it.
+ 
+ You typically do not need to call this method.
+ 
+ @param completion The completion handler to call once the pack has database has
+ been reset. This handler is executed asynchronously on the main queue.
+ */
+
+- (void)resetDatabaseWithCompletionHandler:(void (^)(NSError *_Nullable error))completion;
+
 /*
  Inserts the provided resource into the ambient cache.
  
@@ -376,7 +448,7 @@ NMF_EXPORT
  */
 - (void)preloadData:(NSData *)data forURL:(NSURL *)url modificationDate:(nullable NSDate *)modified expirationDate:(nullable NSDate *)expires eTag:(nullable NSString *)eTag mustRevalidate:(BOOL)mustRevalidate NS_SWIFT_NAME(preload(_:for:modifiedOn:expiresOn:eTag:mustRevalidate:));
 
-- (void)putResourceWithUrl:(NSURL *)url data:(NSData *)data modified:(nullable NSDate *)modified expires:(nullable NSDate *)expires etag:(nullable NSString *)etag mustRevalidate:(BOOL)mustRevalidate __attribute__((deprecated("Use -preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:.")));
+- (void)putResourceWithUrl:(NSURL *)url data:(NSData *)data modified:(nullable NSDate *)modified expires:(nullable NSDate *)expires etag:(nullable NSString *)etag mustRevalidate:(BOOL)mustRevalidate __attribute__((deprecated("", "-preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:")));
 
 @end
 

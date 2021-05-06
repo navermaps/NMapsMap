@@ -1,5 +1,4 @@
-
-#import <Foundation/Foundation.h>
+#import "NMFFoundation.h"
 
 @class NMFIndoorRegion;
 @class NMFIndoorZone;
@@ -8,6 +7,7 @@
 /**
  하나의 실내지도 영역 내에서 선택된 구역 및 층을 나타내는 불변 클래스.
  */
+NMF_EXPORT
 @interface NMFIndoorSelection : NSObject
 
 /**

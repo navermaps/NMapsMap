@@ -18,6 +18,7 @@ const static int NMF_GROUND_OVERLAY_GLOBAL_Z_INDEX = -300000;
  지도에서 특정 영역을 나타내는 오버레이. 지도에 추가하기 전에 반드시 `bounds` 및
  `overlayImage`를 지정해야 합니다.
  */
+NMF_EXPORT
 @interface NMFGroundOverlay : NMFOverlay
 
 /**

@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 
+#import "NMFFoundation.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class NMFMapView;
@@ -7,6 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  줌 버튼 컨트롤.
  */
+NMF_EXPORT
 @interface NMFZoomControlView : UIView
 
 /**

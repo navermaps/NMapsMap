@@ -16,6 +16,7 @@ const static int NMF_POLYGON_OVERLAY_GLOBAL_Z_INDEX = -200000;
 /**
  지도에 도형을 나타내는 오버레이.
  */
+NMF_EXPORT
 @interface NMFPolygonOverlay : NMFOverlay
 
 /**

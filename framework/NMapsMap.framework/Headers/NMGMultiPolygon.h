@@ -13,6 +13,7 @@
 /**
  지도상의 면을 표현하는 Polygon의 집합체.
  */
+NMF_EXPORT
 @interface NMGMultiPolygon<__covariant PointType> : NSObject <NMGGeometry>
 
 @property (nonatomic, readonly, nonnull) NSArray<NMGPolygon<PointType> *> *polygons;

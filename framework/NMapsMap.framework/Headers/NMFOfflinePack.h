@@ -103,16 +103,15 @@ typedef struct __attribute__((objc_boxable)) NMFOfflinePackProgress {
  
  ### Example
  ```swift
- NMFOfflineStorage.shared.addPack(for: region, withContext: context!) { (pack, error) in
-    guard error == nil else {
-        // If download fails, log the error to the console
-        print("Error: \(error?.localizedDescription ?? "unknown error")")
-        return
-    }
+ NMFOfflineStorage.shared.addPack(for: region, withContext: context) { (pack, error) in
+     guard let pack = pack else {
+         // If adding the pack fails, log an error to console.
+         print("Error:", error?.localizedDescription ?? "unknown error adding pack at \(#file)(\(#line)) in \(#function)")
+         return
+     }
  
-    // Start an NMFOfflinePack download
-    pack!.resume()
- }
+     // Start an NMFOfflinePack download
+     pack.resume()
  ```
  */
 NMF_EXPORT
