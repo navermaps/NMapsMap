@@ -208,6 +208,22 @@ extern NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 @property(nonatomic) CGFloat captionRequestedWidth;
 
 /**
+ 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 캡션의 최소 줌 레벨보다 작을 경우 아이콘만 나타나고
+ 주 캡션 및 보조 캡션은 나타나지 않습니다.
+ 
+ 기본값은 `NMF_MIN_ZOOM`입니다.
+ */
+@property(nonatomic) double captionMinZoom;
+
+/**
+ 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
+ 주 캡션 및 보조 캡션은 나타나지 않습니다.
+ 
+ 기본값은 `NMF_MAX_ZOOM`입니다.
+ */
+@property(nonatomic) double captionMaxZoom;
+
+/**
  보조 캡션의 텍스트. 보조 캡션은 주 캡션의 아래에 나타납니다. 빈 문자열일 경우 보조 캡션이 표시되지 않습니다.
  
  기본값은 빈 문자열입니다.
@@ -245,20 +261,20 @@ extern NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 @property(nonatomic) CGFloat subCaptionRequestedWidth;
 
 /**
- 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
- 캡션은 화면에 나타나지 않으며 이벤트도 받지 못합니다.
+ 보조 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 보조 캡션의 최소 줌 레벨보다 작을 경우 아이콘 및
+ 주 캡션만 나타나고 보조 캡션은 나타나지 않습니다.
  
  기본값은 `NMF_MIN_ZOOM`입니다.
  */
-@property(nonatomic) double captionMinZoom;
+@property(nonatomic) double subCaptionMinZoom;
 
 /**
- 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
- 캡션은 화면에 나타나지 않으며 이벤트도 받지 못합니다.
+ 보조 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 보조 캡션의 최대 줌 레벨보다 클 경우 아이콘 및 주
+ 캡션만 나타나고 보조 캡션은 나타나지 않습니다.
  
  기본값은 `NMF_MAX_ZOOM`입니다.
  */
-@property(nonatomic) double captionMaxZoom;
+@property(nonatomic) double subCaptionMaxZoom;
 
 /**
  캡션 아이콘의 정렬 방향.

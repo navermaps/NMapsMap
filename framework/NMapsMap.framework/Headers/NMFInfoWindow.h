@@ -34,7 +34,7 @@ const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
 /**
  정보 창에서 사용할 이미지를 제공해 줄 수 있는 이미지 데이터 소스.
  */
-@property(nonatomic, weak) id<NMFOverlayImageDataSource> dataSource;
+@property(nonatomic) id<NMFOverlayImageDataSource> dataSource;
 
 /**
  정보 창이 열려 있는 마커.
