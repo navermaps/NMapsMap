@@ -4,8 +4,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NMFRendererType) {
-    NMFRendererTypeMetal,
-    NMFRendererTypeOpenGL
+    NMFRendererTypeOpenGL,
+    NMFRendererTypeMetal
 };
 
 NMF_EXPORT
