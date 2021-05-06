@@ -18,15 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NMFCircleOverlay : NMFOverlay
 
 /**
- 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
- 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
- 
- 기본값은 `NMF_CIRCLE_OVERLAY_GLOBAL_Z_INDEX`입니다.
- */
-@property(nonatomic) NSInteger globalZIndex;
-
-/**
  중심점. 원을 지도에 추가하기 전에 반드시 이 속성에 값을 지정해야 합니다.
  */
 @property(nonatomic) NMGLatLng *center;

@@ -22,15 +22,6 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
 @interface NMFMultipartPath : NMFOverlay
 
 /**
- 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
- 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
- 
- 기본값은 `NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX`입니다.
- */
-@property(nonatomic) NSInteger globalZIndex;
-
-/**
  좌표열 파트의 목록. 목록의 크기가 `1`이상이어야 합니다.
  */
 @property(nonatomic, strong) NSArray<NMGLineString *> *lineParts;
@@ -77,6 +68,27 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
  기본값은 `nil`입니다.
  */
 @property(nonatomic, strong, nullable) NMFOverlayImage *patternIcon;
+
+/**
+ 경로선과 지도 심벌이 겹칠 경우 지도 심벌을 숨길지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isHideCollidedSymbols;
+
+/**
+ 경로선과 마커가 겹칠 경우 마커를 숨길지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isHideCollidedMarkers;
+
+/**
+ 경로선과 마커의 캡션이 겹칠 경우 마커의 캡션을 숨길지 여부.
+ 
+ 기본값은 `NO`입니다.
+ */
+@property (nonatomic) BOOL isHideCollidedCaptions;
 
 /**
  좌표열 파트의 목록을 지정하여 NMFMultipartPath 객체를 생성합니다.

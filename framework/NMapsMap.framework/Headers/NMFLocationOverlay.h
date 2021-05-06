@@ -36,15 +36,6 @@ const static int NMF_LOCATION_OVERLAY_GLOBAL_Z_INDEX = 300000;
 @interface NMFLocationOverlay : NMFOverlay
 
 /**
- 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
- 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
- 
- 기본값은 `NMF_LOCATION_OVERLAY_GLOBAL_Z_INDEX`입니다.
- */
-@property(nonatomic) NSInteger globalZIndex;
-
-/**
  아이콘의 너비. pt 단위. `NMF_LOCATION_OVERLAY_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.
  
  기본값은 `NMF_LOCATION_OVERLAY_SIZE_AUTO`입니다.

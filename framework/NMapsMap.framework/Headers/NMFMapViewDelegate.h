@@ -44,6 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mapView:(NMFMapView *)mapView regionDidChangeAnimated:(BOOL)animated byReason:(NSInteger)reason;
 
 /**
+ 현재 진행 중인 지도 이동 애니메이션이 취소되었을때 호출되는 콜백 메서드.
+ 
+ @param mapView 영역이 변경되고 있었던 `NMFMapView` 객체.
+ @param reason 취소된 원인.
+ */
+- (void)mapViewCameraUpdateCancel:(NMFMapView *)mapView byReason:(NSInteger)reason;
+
+/**
  지도가 표시하고 있는 영역이 변경된 후 진행 중인 터치 이벤트가 없을 때 호출되는 콜백 메서드.
  
  @param mapView 영역이 변경된 `NMFMapView` 객체.

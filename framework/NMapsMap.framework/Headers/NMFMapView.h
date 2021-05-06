@@ -467,6 +467,13 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  */
 - (void)cancelTransitions;
 
+/**
+ 현재 진행 중인 지도 이동 애니메이션을 취소합니다.
+ 
+ @param reason 취소의 원인.
+ */
+- (void)cancelTransitions:(NSInteger)reason;
+
 #pragma mark Symbol
 
 /**

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  오버레이를 어느 방향으로 정렬할지 나타내는 열거형.
+ 
+ @warning Deprecated. `NMFAlignType`을 사용하세요.
  */
 typedef NS_ENUM(NSInteger, NMFAlign) {
     /**
@@ -57,7 +59,70 @@ typedef NS_ENUM(NSInteger, NMFAlign) {
      왼쪽 아래.
      */
     NMFAlignBottomLeft
-};
+} __deprecated_msg("Use `NMFAlignType` instead.");
+
+/**
+ 오버레이를 어느 방향으로 정렬할지 나타내는 객체.
+ 속성 객체로만 사용해야 합니다.
+ */
+@interface NMFAlignType : NSObject <NSSecureCoding, NSCopying>
+
+/**
+ 가운데.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *center;
+
+/**
+ 왼쪽.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *left;
+
+/**
+ 오른쪽.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *right;
+
+/**
+ 위.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *top;
+
+/**
+ 아래.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *bottom;
+
+/**
+ 왼쪽 위.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *topLeft;
+
+/**
+ 오른쪽 위.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *topRight;
+
+/**
+ 오른쪽 아래.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *bottomRight;
+
+/**
+ 왼쪽 아래.
+ */
+@property(class, nonatomic, readonly) NMFAlignType *bottomLeft;
+
++ (NMFAlignType *)center;
++ (NMFAlignType *)left;
++ (NMFAlignType *)right;
++ (NMFAlignType *)top;
++ (NMFAlignType *)bottom;
++ (NMFAlignType *)topLeft;
++ (NMFAlignType *)topRight;
++ (NMFAlignType *)bottomRight;
++ (NMFAlignType *)bottomLeft;
+
+@end
 
 /**
  끝 지점의 모양

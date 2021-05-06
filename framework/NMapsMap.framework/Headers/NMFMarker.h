@@ -59,15 +59,6 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 @interface NMFMarker : NMFOverlay
 
 /**
- 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
- 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
- 
- 기본값은 `NMF_MARKER_GLOBAL_Z_INDEX`입니다.
- */
-@property (nonatomic) NSInteger globalZIndex;
-
-/**
  사용자가 임의로 지정할 수 있는 태그. 마커를 그루핑하거나 구분하기 위한 목적으로 사용할 수 있습니다.
  */
 @property (nonatomic) NSUInteger tag;
@@ -249,11 +240,41 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 @property(nonatomic) CGFloat subCaptionRequestedWidth;
 
 /**
+ 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
+ 캡션은 화면에 나타나지 않으며 이벤트도 받지 못합니다.
+ 
+ 기본값은 `NMF_MIN_ZOOM`입니다.
+ */
+@property(nonatomic) double captionMinZoom;
+
+/**
+ 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
+ 캡션은 화면에 나타나지 않으며 이벤트도 받지 못합니다.
+ 
+ 기본값은 `NMF_MAX_ZOOM`입니다.
+ */
+@property(nonatomic) double captionMaxZoom;
+
+/**
  캡션 아이콘의 정렬 방향.
  
  기본값은 `NMFAlignBottom`입니다.
+ 
+ @warning Deprecated. `captionAligns` 속성을 사용하세요.
  */
-@property(nonatomic) NMFAlign captionAlign;
+@property(nonatomic) NMFAlign captionAlign __deprecated_msg("Use `captionAligns` instead.");
+
+/**
+ 캡션을 아이콘의 어느 방향에 위치시킬지를 지정합니다. 캡션은 `captionAligns` 배열에 지정된 순서대로 우선적으로
+ 위치합니다. 만약 캡션이 다른 마커와 겹치지 않거나 겹치더라도 해당 마커의  `isHideCollidedCaptions`가
+ `NO`라면 캡션은 반드시 `captionAligns[0]`에 위치합니다. 그렇지 않을 경우 겹치지 않은 다음
+ 방향에 위치하며, 어느 방향으로 위치시켜도 다른 마커와 겹칠 경우 캡션이 숨겨집니다.
+ 
+ 기본값은 `NMFAlignType.bottom`입니다.
+ 
+ @see `NMFAlignType`
+ */
+@property(nonatomic) NSArray<NMFAlignType *> *captionAligns;
 
 /**
  아이콘과 캡션 간의 여백.

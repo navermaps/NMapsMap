@@ -17,15 +17,6 @@ const static int NMF_ARROWHEAD_PATH_OVERLAY_GLOBAL_Z_INDEX = 100000;
 @interface NMFArrowheadPath : NMFOverlay
 
 /**
- 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
- 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
- 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
- 
- 기본값은 `NMF_ARROWHEAD_PATH_OVERLAY_GLOBAL_Z_INDEX`입니다.
- */
-@property (nonatomic) NSInteger globalZIndex;
-
-/**
  색상. 색상은 반투명일 수 없으며, 완전히 투명하거나 완전히 불투명해야 합니다. 색상의
  알파가 `0`이 아닌 경우 완전히 불투명한 것으로 간주됩니다. 색상이 투명할 경우 테두리도 그려지지 않습니다.
  
