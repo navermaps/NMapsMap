@@ -25,8 +25,7 @@
 @end
 
 @protocol NMGPointable <NMGGeometry>
-
-@required
+@optional
 - (nonnull NMGLatLng *)toLatLng;
 - (BOOL)isWithinCoverage;
 

@@ -57,10 +57,10 @@
 + (long)tileIdFromZ:(NSUInteger)z WithCoord:(NMGWebMercatorCoord * _Nonnull)coord;
 
 /**
- `coord` 좌표가 위치한 곳의 `z` 레벨 타일 ID를 반환합니다.
+ `latLng` 좌표가 위치한 곳의 `z` 레벨 타일 ID를 반환합니다.
  
  @param z 줌 레벨.
- @param coord 좌표.
+ @param latLng 좌표.
  @return 타일 ID.
  */
 + (long)tileIdFromZ:(NSUInteger)z WithLatLng:(NMGLatLng * _Nonnull)latLng;

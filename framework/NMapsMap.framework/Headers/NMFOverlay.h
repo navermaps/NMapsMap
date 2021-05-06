@@ -124,7 +124,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 @property(nonatomic, weak, nullable) NMFMapView *mapView;
 
 /**
- 숨김 속성. `YES`일 경우 오버레이는 화면에 표시되지 않으며 이벤트도 받지 못합니다.
+ 숨김 속성. `YES`일 경우 오버레이는 화면에 나타나지 않으며 이벤트도 받지 못합니다.
  숨김 속성은 명시적으로 지정하지 않는 한 변하지 않습니다. 즉, 오버레이가 현재 보이는 지도 영역의 바깥쪽으로
  나가더라도 숨김 속성이 'YES'로 변하지는 않습니다.
  
@@ -133,7 +133,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 @property(nonatomic) BOOL hidden;
 
 /**
- 보조 z 인덱스. 전역 Z 인덱스가 동일한 여러 오버레이가 화면에서 겹쳐지면 보조 Z 인덱스가 큰
+ 보조 Z 인덱스. 전역 Z 인덱스가 동일한 여러 오버레이가 화면에서 겹쳐지면 보조 Z 인덱스가 큰
  오버레이가 작은 오버레이를 덮습니다.
  
  기본값은 `0`입니다.
@@ -141,20 +141,22 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 @property(nonatomic) NSInteger zIndex;
 
 /**
- 전역 z 인덱스. 여러 오버레이가 화면에서 겹쳐지면 전역 Z 인덱스가 큰 오버레이가 작은 오버레이를
+ 전역 Z 인덱스. 여러 오버레이가 화면에서 겹쳐지면 전역 Z 인덱스가 큰 오버레이가 작은 오버레이를
  덮습니다. 또한 값이 `0` 이상이면 오버레이가 심벌 위에, `0` 미만이면 심벌 아래에 그려집니다.
  */
 @property(nonatomic) NSInteger globalZIndex;
 
 /**
- 오버레이가 보이는 최소 줌 레벨.
+ 오버레이가 보이는 최소 줌 레벨. 지도의 줌 레벨이 오버레이의 최소 줌 레벨보다 작을 경우 오버레이는 화면에 나타나지
+ 않으며 이벤트도 받지 못합니다.
  
  기본값은 `NMF_MIN_ZOOM`입니다.
  */
 @property(nonatomic) double minZoom;
 
 /**
- 오버레이가 보이는 최대 줌 레벨.
+ 오버레이가 보이는 최대 줌 레벨. 지도의 줌 레벨이 오버레이의 최대 줌 레벨보다 클 경우 오버레이는 화면에 나타나지 않으며
+ 이벤트도 받지 못합니다.
  
  기본값은 `NMF_MAX_ZOOM`입니다.
  */

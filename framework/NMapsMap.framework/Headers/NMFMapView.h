@@ -20,6 +20,26 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NMFPickable;
 
 /**
+ 기본 밝은 배경색.
+ */
+extern UIColor *const NMFDefaultBackgroundLightColor;
+
+/**
+ 기본 어두운 배경색.
+ */
+extern UIColor *const NMFDefaultBackgroundDarkColor;
+
+/**
+ 기본 밝은 배경 이미지.
+ */
+extern UIImage *const NMFDefaultBackgroundLightImage;
+
+/**
+ 기본 어두운 배경 이미지.
+ */
+extern UIImage *const NMFDefaultBackgroundDarkImage;
+
+/**
  건물 레이어 그룹. 기본적으로 활성화됩니다.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
@@ -69,7 +89,9 @@ typedef NS_ENUM(NSInteger, NMFMapType) {
     /** 위성 지도(겹쳐보기). */
     NMFMapTypeHybrid,
     /** 지형도. */
-    NMFMapTypeTerrain
+    NMFMapTypeTerrain,
+    /** 없음. 지도는 나타나지 않고 오버레이만이 나타납니다. */
+    NMFMapTypeNone
 };
 
 /**
@@ -129,7 +151,7 @@ NMF_EXPORT IB_DESIGNABLE
 /**
  지도의 배경 이미지. 배경은 해당 지역의 지도 데이터가 없거나 로딩 중일 때 나타납니다.
  */
-@property (nonatomic) UIImage *backgroundImage;
+@property (nonatomic, nullable) UIImage *backgroundImage;
 
 /**
  지도 콘텐츠 영역에 대한 `NMGLatLngBounds`.

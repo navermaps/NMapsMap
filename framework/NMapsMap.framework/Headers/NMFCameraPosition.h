@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  좌표와 줌 레벨로부터 객체를 생성합니다. `tilt`와 `heading`은 `0`으로 지정됩니다.
  
  @param target 카메라의 좌표.
- @param heading 카메라의 베어링 각도.
+ @param zoom 카메라의 줌 레벨.
  
  @return `NMFCameraPosition` 객체.
  */
