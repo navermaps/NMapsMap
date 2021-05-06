@@ -1,8 +1,8 @@
-#import "NMFGeometry.h"
-
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "NMFGeometry.h"
+#import "NMFMyPositionMode.h"
 #import "NMFFoundation.h"
 #import "NMFTypes.h"
 
@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NMFProjection;
 
 @protocol NMFMapViewDelegate;
+@protocol NMFMapViewTouchDelegate;
+@protocol NMFMapViewCameraDelegate;
+@protocol NMFMapViewOptionDelegate;
 @protocol NMFPickable;
 
 /**
@@ -119,11 +122,44 @@ NMF_EXPORT IB_DESIGNABLE
 #pragma mark Accessing the Delegate
 
 /**
- `NMFMapView`의 위임자.
+ `NMFMapView`의 위임자. 이 속성은 더이상 사용이 권장되지 않습니다. 대신 `touchDelegate`, `addCameraDelegate`/`removeCameraDelegate`, `addOptionDelegate`/`removeOptionDelegate`를 사용하세요.
  
- 지도 뷰의 위임자를 이용해 지도에 오버레이와 관련된 정보나 화면 갱신 여부 등의 메시지를 전달합니다.
+ 만약 `delegate`와 `touchDelegate`가 모두 지정되면 `delegate`는 무시되고 `touchDelegate`만이 동작합니다.
  */
-@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewDelegate> delegate;
+@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewDelegate> delegate __attribute__((deprecated("Use touchDelegate, addCameraDelegate/removeCameraDelegate or addOptionDelegate/removeOptionDelegate")));
+
+/**
+ 지도 터치에 대한 위임자. 지도 탭, 심벌 탭 등 지도와 관련된 터치 이벤트가 전달됩니다.
+ */
+@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewTouchDelegate> touchDelegate;
+
+/**
+ 카메라의 움직임에 대한 위임자를 등록합니다.
+ 
+ @param delegate `NMFMapViewCameraDelegate` 객체.
+ */
+- (void)addCameraDelegate:(id<NMFMapViewCameraDelegate> _Nonnull)delegate NS_SWIFT_NAME(addCameraDelegate(delegate:));
+
+/**
+ 카메라의 움직임에 대한 위임자를 해제합니다.
+ 
+ @param delegate `NMFMapViewCameraDelegate` 객체.
+ */
+- (void)removeCameraDelegate:(id<NMFMapViewCameraDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeCameraDelegate(delegate:));
+
+/**
+ 지도 옵션 변경에 대한 위임자를 등록합니다.
+
+ @param delegate `NMFMapViewOptionDelegate` 객체.
+ */
+- (void)addOptionDelegate:(id<NMFMapViewOptionDelegate> _Nonnull)delegate NS_SWIFT_NAME(addOptionDelegate(delegate:));
+
+/**
+ 지도 옵션 변경에 대한 위임자를 해제합니다.
+ 
+ @param delegate `NMFMapViewOptionDelegate` 객체.
+ */
+- (void)removeOptionDelegate:(id<NMFMapViewOptionDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeOptionDelegate(delegate:));
 
 #pragma mark Configuring the Map’s Appearance
 
@@ -136,7 +172,7 @@ NMF_EXPORT IB_DESIGNABLE
  <li>줌 레벨이 커지거나 작아지면 지도 심벌도 일정 정도 함께 커지거나 작아집니다.</li>
  <li>`mapType` 지도 유형을 사용할 수 없습니다.</li>
  <li>`setLayerGroup:isEnabled:`, `getLayerGroupEnabled:`, `indoorMapEnabled`, `nightModeEnabled`, `lightness`, `buildingHeight`, `symbolScale`, `symbolPerspectiveRatio`가 동작하지 않습니다.</li>
- <li>`NMFMapViewDelegate.mapView:didTapSymbol:`이 호출되지 않습니다.</li>
+ <li>`NMFMapViewTouchDelegate.mapView:didTapSymbol:`이 호출되지 않습니다.</li>
  <li>`NMFMarker.isHideCollidedSymbols`가 동작하지 않습니다.</li>
  </ul>
  기본값은 `NO`입니다.
@@ -160,7 +196,7 @@ NMF_EXPORT IB_DESIGNABLE
 
 /**
  지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다. 따라서 패딩을 변경하면 비록 화면에 나타나는 지도의 모습은 변하지 않지만
- 카메라의 위치는 변경되며, `mapView(:regionWillChangeAnimated:byReason:)`이 호출됩니다.
+ 카메라의 위치는 변경되며, `NMFMapViewCameraDelegate`의 메서드가 호출됩니다.
 */
 @property (nonatomic, assign) UIEdgeInsets contentInset;
 
@@ -180,6 +216,14 @@ NMF_EXPORT IB_DESIGNABLE
  기본값은 `NMFMapTypeBasic`입니다.
  */
 @property(nonatomic) NMFMapType mapType;
+
+/**
+ 지도가 어두운지 여부를 반환합니다. 야간 모드가 활성화되어 있거나 지도의 유형이 `NMFMapTypeSatellite`
+ 또는 `NMFMapTypeHybrid`일 경우 어두운 것으로 간주됩니다.
+ 
+ @return 어두울 경우 `YES`, 그렇지 않을 경우 `NO`.
+ */
+- (BOOL)isDark;
 
 /**
  레이어 그룹을 활성화할지 여부를 지정합니다.
@@ -474,6 +518,13 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  */
 - (void)cancelTransitions:(NSInteger)reason;
 
+/**
+ 위치 추적 모드.
+ 
+ `NMFMyPositionMode` 객체.
+ */
+@property(nonatomic) NMFMyPositionMode positionMode;
+
 #pragma mark Symbol
 
 /**
@@ -512,7 +563,6 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  @return 오버레이 또는 심벌. point에 존재하는 오버레이 또는 심벌이 없을 경우 nil.
  */
 - (nullable id<NMFPickable>)pick:(CGPoint)point;
-
 
 @end
 

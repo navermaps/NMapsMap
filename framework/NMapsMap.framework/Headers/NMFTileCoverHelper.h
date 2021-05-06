@@ -43,9 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak) NMFMapView *mapView;
 
 /**
- 타일 목록을 갱신할 때 `-mapViewIdle:` 대신 `-mapViewRegionIsChanging::`를
- 사용할지 여부를 설정합니다. `-mapViewRegionIsChanging::`를 사용하면 목록이 더 빠르게 갱신되지만
- 성능이 하락합니다.
+ 타일 목록을 갱신할 때 `-mapViewCameraIdle:` 대신 `-mapView:cameraIsChangingByReason:`을 사용할지 여부를 설정합니다.
+ `-mapView:cameraIsChangingByReason:`을 사용하면 목록이 더 빠르게 갱신되지만 성능이 하락합니다.
  기본값 `NO`.
  */
 @property(nonatomic) BOOL isUpdateOnChange;

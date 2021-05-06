@@ -163,7 +163,7 @@ typedef NS_ENUM(NSUInteger, NMFOverlayLineJoin) {
 /**
  오버레이 터치에 대한 이벤트 핸들러 블록 타입 선언.
  
- @return `YES`일 경우 이벤트를 소비합니다. 그렇지 않을 경우 `NMFMapView`까지 이벤트가 전달되어 `NMFMapViewDelegate`의 `didTapMapView`가 호출됩니다.
+ @return `YES`일 경우 이벤트를 소비합니다. 그렇지 않을 경우 `NMFMapView`까지 이벤트가 전달되어 `NMFMapViewTouchDelegate`의 `mapView:didTapMap:point:`가 호출됩니다.
  */
 typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 
@@ -231,7 +231,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
  
  기본값은 `YES`입니다.
  */
-@property(nonatomic) BOOL isMinZoomInclusive;
+@property(nonatomic, setter=setMinZoomInclusive:) BOOL isMinZoomInclusive;
 
 /**
  지도의 줌 레벨과 오버레이의 최대 줌 레벨이 동일할 때 오버레이를 보일지 여부를 반환합니다.
@@ -239,7 +239,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
  
  기본값은 `YES`입니다.
  */
-@property(nonatomic) BOOL isMaxZoomInclusive;
+@property(nonatomic, setter=setMaxZoomInclusive:) BOOL isMaxZoomInclusive;
 
 /**
  오버레이가 터치될 경우 호출되는 콜백 블록.

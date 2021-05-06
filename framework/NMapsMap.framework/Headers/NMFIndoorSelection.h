@@ -1,10 +1,3 @@
-//
-//  NMFIndoorSelection.h
-//  sdk
-//
-//  Created by Won-Young Son on 2018. 8. 22..
-//  Copyright © 2018년 NaverMap. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 

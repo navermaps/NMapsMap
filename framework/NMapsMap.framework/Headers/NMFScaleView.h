@@ -1,17 +1,13 @@
 #import <UIKit/UIKit.h>
 
-#define COMPASSVIEW_DEFAULT_SIZE        50
-#define COMPASSVIEW_DEFAULT_HEADING     0.0
-#define COMPASSVIEW_DEFAULT_TILTING     0.0
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class NMFMapView;
 
 /**
- 나침반 컨트롤.
+ 축척 바 컨트롤.
  */
-@interface NMFCompassView : UIImageView
+@interface NMFScaleView : UIView
 
 /**
  이 컨트롤과 연결할 지도 객체. `nil`일 경우 컨트롤이 동작하지 않습니다.
@@ -19,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  기본값은 `nil`입니다.
  */
 @property (nonatomic, weak, nullable) NMFMapView *mapView;
+
+/**
+ 축척 바의 너비에 대한 `NSLayoutConstraint` 객체.
+ */
+@property (nonatomic, weak, nullable) IBOutlet NSLayoutConstraint *scaleBarWidthConstraint;
 
 @end
 

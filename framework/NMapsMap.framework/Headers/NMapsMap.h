@@ -19,6 +19,10 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 #import "NMFMapView.h"
 #import "NMFMapView+IBAdditions.h"
 #import "NMFMapViewDelegate.h"
+#import "NMFMapViewTouchDelegate.h"
+#import "NMFMapViewCameraDelegate.h"
+#import "NMFMapViewOptionDelegate.h"
+
 #import "NMFOfflinePack.h"
 #import "NMFOfflineRegion.h"
 #import "NMFOfflineStorage.h"
@@ -46,10 +50,13 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 #import "NMFCircleOverlay.h"
 
 #import "NMFCompassView.h"
-#import "NMFMapScaleView.h"
+#import "NMFScaleView.h"
+#import "NMFZoomControlView.h"
+#import "NMFLocationButton.h"
 #import "NSBundle+NMFAdditions.h"
 #import "NMFProjection.h"
 
+#import "NMFIndoorLevelPickerView.h"
 #import "NMFIndoorView.h"
 #import "NMFIndoorLevel.h"
 #import "NMFIndoorZone.h"

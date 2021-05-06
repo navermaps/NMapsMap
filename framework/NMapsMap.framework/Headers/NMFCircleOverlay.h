@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "NMapsGeometry.h"
 
+#import "NMapsGeometry.h"
 #import "NMFOverlay.h"
 
 @class NMGLatLng;

@@ -1,10 +1,3 @@
-//
-//  NMFIndoorView.h
-//  dynamic
-//
-//  Created by Won-Young Son on 2018. 1. 8..
-//  Copyright © 2018년 NaverMap. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 

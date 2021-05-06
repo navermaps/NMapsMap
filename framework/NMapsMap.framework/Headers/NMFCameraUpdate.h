@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import "NMapsGeometry.h"
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
+
+#import "NMapsGeometry.h"
 
 @class NMFCameraUpdateParams;
 @class NMFCameraPosition;
@@ -73,7 +74,7 @@ typedef NS_ENUM(NSUInteger, NMFCameraUpdateAnimation) {
  - 카메라의 위치: 카메라를 이동할 위치. `CameraUpdate`를 생성하는 팩토리 메서드의 파라미터로 지정합니다.
  - 피봇 지점: 카메라 이동의 기준점이 되는 지점. 피봇 지점을 지정하면 이동, 줌 레벨 변경, 회전의 기준점이 해당 지점이 됩니다. `pivot`으로 지정합니다.
  - 애니메이션: 카메라 이동 시 적용될 애니메이션. 애니메이션의 유형과 시간을 지정할 수 있습니다. `animation`과 `animationDuration`으로 지정합니다.
- - 이동 원인: 카메라 이동의 원인. 이 값을 지정하면 `-mapView:regionWillChangeAnimated:byReason:`의 `byReason` 파라미터로 전달됩니다. `reason`으로 지정합니다.
+ - 이동 원인: 카메라 이동의 원인. 이 값을 지정하면 `NMFMapViewCameraDelegate`의 메서드에 `reason` 파라미터로 전달됩니다. `reason`으로 지정합니다.
  @see `NMFMapView` `-moveCamera:`
  */
 @interface NMFCameraUpdate : NSObject

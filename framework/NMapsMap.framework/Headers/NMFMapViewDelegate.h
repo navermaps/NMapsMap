@@ -9,8 +9,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NMFIndoorRegion;
 
 /**
- `NMFMapView`에 관련된 업데이트 및 비동기 작업의 결과를 알려주는 콜백 메서드가 정의된 프로토콜.
+ `NMFMapView`에 관련된 업데이트 및 비동기 작업의 결과를 알려주는 콜백 메서드가 정의된 프로토콜. 이 프로토콜은 더이상 사용이 권장되지 않습니다. `NMFMapViewTouchDelegate`, `NMFMapViewCameraDelegate`, `NMFMapViewOptionDelegate`를 사용하세요.
  */
+__attribute__((deprecated("Use NMFMapViewTouchDelegate, NMFMapViewCameraDelegate or NMFMapViewOptionDelegate")))
 @protocol NMFMapViewDelegate <NSObject>
 
 @optional
