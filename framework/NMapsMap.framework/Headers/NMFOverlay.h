@@ -191,7 +191,7 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 /**
  숨김 속성. `YES`일 경우 오버레이는 화면에 나타나지 않으며 이벤트도 받지 못합니다.
  숨김 속성은 명시적으로 지정하지 않는 한 변하지 않습니다. 즉, 오버레이가 현재 보이는 지도 영역의 바깥쪽으로
- 나가더라도 숨김 속성이 'YES'로 변하지는 않습니다.
+ 나가더라도 숨김 속성이 `YES`로 변하지는 않습니다.
  
  기본값은 `NO`입니다.
  */
@@ -212,20 +212,34 @@ typedef BOOL (^NMFOverlayTouchHandler)(NMFOverlay * __weak);
 @property(nonatomic) NSInteger globalZIndex;
 
 /**
- 오버레이가 보이는 최소 줌 레벨. 지도의 줌 레벨이 오버레이의 최소 줌 레벨보다 작을 경우 오버레이는 화면에 나타나지
- 않으며 이벤트도 받지 못합니다.
+ 오버레이가 보이는 최소 줌 레벨.
  
  기본값은 `NMF_MIN_ZOOM`입니다.
  */
 @property(nonatomic) double minZoom;
 
 /**
- 오버레이가 보이는 최대 줌 레벨. 지도의 줌 레벨이 오버레이의 최대 줌 레벨보다 클 경우 오버레이는 화면에 나타나지 않으며
- 이벤트도 받지 못합니다.
+ 오버레이가 보이는 최대 줌 레벨.
  
  기본값은 `NMF_MAX_ZOOM`입니다.
  */
 @property(nonatomic) double maxZoom;
+
+/**
+ 지도의 줌 레벨과 오버레이의 최소 줌 레벨이 동일할 때 오버레이를 보일지 여부를 반환합니다.
+ 만약 `YES`이면 오버레이가 나타나고 `NO`이면 나타나지 않습니다.
+ 
+ 기본값은 `YES`입니다.
+ */
+@property(nonatomic) BOOL isMinZoomInclusive;
+
+/**
+ 지도의 줌 레벨과 오버레이의 최대 줌 레벨이 동일할 때 오버레이를 보일지 여부를 반환합니다.
+ 만약 `YES`이면 오버레이가 나타나고 `NO`이면 나타나지 않습니다.
+ 
+ 기본값은 `YES`입니다.
+ */
+@property(nonatomic) BOOL isMaxZoomInclusive;
 
 /**
  오버레이가 터치될 경우 호출되는 콜백 블록.

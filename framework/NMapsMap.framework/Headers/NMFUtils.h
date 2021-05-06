@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 
 #import "NMapsGeometry.h"
+#import "NMFMapView.h"
 
 NS_INLINE CGFloat ScreenScaleFactor() {
     static dispatch_once_t onceToken;
@@ -38,4 +39,21 @@ NS_INLINE CGFloat ScreenScaleFactor() {
  */
 +(double)progressWithLineStrings:(NSArray<NMGLineString *> * _Nonnull)lineStrings targetLatLng:(NMGLatLng * _Nonnull)targetLatLng;
 
+@end
+
+
+/**
+ 카메라 관련 유틸리티를 제공하는 클래스.
+ */
+@interface NMFCameraUtils : NSObject
+
+/**
+ `bounds`가 화면에 온전히 보이는 최대 줌 레벨을 반환합니다.
+ 
+ @param bounds 영역.
+ @param insets 영역과 지도 화면 간 확보할 인셋 여백. pt 단위.
+ @param mapView `NMFMapView` 객체.
+ @return `bounds`가 `map`에서 화면에 온전히 보이는 최대 줌 레벨.
+ */
++ (double)getFittableZoomLevelWith:(NMGLatLngBounds * _Nonnull)bounds insets:(UIEdgeInsets)insets mapView:(NMFMapView * _Nonnull)mapView;
 @end

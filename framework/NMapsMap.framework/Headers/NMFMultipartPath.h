@@ -46,10 +46,13 @@ const static int NMF_MULTI_PART_PATH_OVERLAY_GLOBAL_Z_INDEX = -100000;
 @property(nonatomic) CGFloat outlineWidth;
 
 /**
- 진척률. `0`~`1`로 지정합니다. 경로선에서 `0`~`progress`의 선형은 지나온 경로로 간주되어
- `passedColor`와 `passedOutlineColor`가 사용됩니다.
- `progress`~`1`의 선형은 지나갈 경로로 간주되어 `color`와 `passedColor`가 사용됩니다.
- 
+ 진척률. 값의 범위는 `-1`~`1`입니다. 경로는 진척률을 기준으로 지나온 경로와 지나갈 경로로 구분됩니다. 지나온 경로에는
+ `passedColor`와 `passedOutlineColor`가 사용되고 지나갈 경로에는 `color`와 `outlineColor`가 사용됩니다.
+
+ - 진척률을 양수로 지정하면 첫 좌표부터 진척률만큼 떨어진 지점까지의 선형은 지나온 경로로, 나머지는 지나갈 경로로 간주됩니다.
+ - 진척률을 음수로 지정하면 마지막 좌표부터 -진척률만큼 떨어진 지점까지의 선형은 지나온 경로로, 나머지는 지나갈 경로로 간주됩니다.
+ - 진척률을 `0`으로 지정하면 모든 선형이 지나갈 경로로 간주됩니다.
+
  기본값은 `0`입니다.
  */
 @property(nonatomic) double progress;

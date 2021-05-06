@@ -78,11 +78,15 @@ extern NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 
 /**
  아이콘의 너비. pt 단위. `NMF_MARKER_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.
+ 
+ 기본값은 `NMF_MARKER_SIZE_AUTO`입니다.
  */
 @property (nonatomic) CGFloat width;
 
 /**
  아이콘의 높이. pt 단위. `NMF_MARKER_SIZE_AUTO`일 경우 이미지의 높이를 따릅니다.
+ 
+ 기본값은 `NMF_MARKER_SIZE_AUTO`입니다.
  */
 @property (nonatomic) CGFloat height;
 
