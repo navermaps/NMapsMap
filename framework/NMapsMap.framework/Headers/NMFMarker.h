@@ -23,35 +23,35 @@ const static int NMF_MARKER_GLOBAL_Z_INDEX = 200000;
 /**
  파란색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
 /**
  회색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
 /**
  초록색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
 /**
  밝은파란색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
 /**
  핑크색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
 /**
  빨간색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_RED;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_RED;
 /**
  노란색 마커 이미지.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 /**
  검은색 마커 이미지. 색상을 덧입히기에 적합합니다.
  */
-extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
+extern NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 
 /**
  아이콘과 캡션을 이용해 지도 위의 한 지점을 표시하는 오버레이.
@@ -286,7 +286,7 @@ extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 /**
  마커에 열려 있는 정보 창.
 */
-@property (nonatomic, strong, readonly) NMFInfoWindow *infoWindow;
+@property (nonatomic, strong, nullable, readonly) NMFInfoWindow *infoWindow;
 
 /**
  위치를 지정하여 마커를 생성합니다.
