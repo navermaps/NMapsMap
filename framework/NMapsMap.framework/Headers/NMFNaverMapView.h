@@ -70,9 +70,19 @@ NMF_EXPORT
 @property(nonatomic) NMFMyPositionMode positionMode __attribute__((deprecated("Use NMFMapView.positionMode")));
 
 /**
- 현재 지도의 스냅숏을 `UIImage`로 촬영합니다.
+ 현재 지도의 스냅숏을 촬영합니다. 스냅숏이 촬영되면 `complete` 가 호출됩니다.
+ `takeSnapShot:YES complete:complete` 와 동일합니다.
  
  @param complete 지도 스냅숏이 촬영되면 실행되는 블록 메서드.
  */
 - (void)takeSnapShot:(void (^_Nullable)(UIImage * _Nonnull))complete;
+
+/**
+ 컨트롤을 포함한 현재 지도의 스냅숏을 촬영합니다. 스냅숏이 촬영되면 `complete` 가 호출됩니다.
+ 
+ @param showControls 컨트롤 노출 여부. 노출할 경우 `YES`, 그렇지 않을 경우 `NO`.
+ @param complete 지도 스냅숏이 촬영되면 실행되는 블록 메서드.
+ */
+- (void)takeSnapshotWithShowControls:(BOOL)showControls complete:(void (^_Nullable)(UIImage * _Nonnull))complete;
+
 @end

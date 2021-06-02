@@ -64,3 +64,4 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 #import "NMFIndoorZone.h"
 #import "NMFIndoorRegion.h"
 #import "NMFIndoorSelection.h"
+#import "NMFIndoorSelectionDelegate.h"

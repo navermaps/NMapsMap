@@ -6,9 +6,6 @@
 #import "NMFFoundation.h"
 #import "NMFTypes.h"
 
-#define NMF_MIN_ZOOM  ((double) 0.0)
-#define NMF_MAX_ZOOM  ((double) 21.0)
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class NMFLocationOverlay;
@@ -20,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NMFMapViewTouchDelegate;
 @protocol NMFMapViewCameraDelegate;
 @protocol NMFMapViewOptionDelegate;
+@protocol NMFIndoorSelectionDelegate;
 @protocol NMFPickable;
 
 /**
@@ -426,6 +424,20 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  기본값은 `20`입니다.
  */
 @property(nonatomic) double indoorFocusRadius;
+
+/**
+ 실내 지도에 대한 위임자를 등록합니다.
+
+ @param delegate `NMFIndoorSelectionDelegate` 객체.
+ */
+- (void)addIndoorSelectionDelegate:(id<NMFIndoorSelectionDelegate> _Nonnull)delegate NS_SWIFT_NAME(addIndoorSelectionDelegate(delegate:));
+
+/**
+ 실내 지도에 대한 위임자를 해제합니다.
+
+ @param delegate `NMFIndoorSelectionDelegate` 객체.
+ */
+- (void)removeIndoorSelectionDelegate:(id<NMFIndoorSelectionDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeIndoorSelectionDelegate(delegate:));
 
 
 
