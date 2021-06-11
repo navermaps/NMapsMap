@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NMFCameraPosition;
 @class NMFCameraUpdate;
 @class NMFProjection;
+@class NMFIndoorView;
 
 @protocol NMFMapViewDelegate;
 @protocol NMFMapViewTouchDelegate;
@@ -438,6 +439,15 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  @param delegate `NMFIndoorSelectionDelegate` 객체.
  */
 - (void)removeIndoorSelectionDelegate:(id<NMFIndoorSelectionDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeIndoorSelectionDelegate(delegate:));
+
+/**
+ 실내지도 뷰를 나타내도록 요청합니다. 이 메서드를 호출하더라도 실내지도 뷰가 즉시 나타나는 것이 보장되지 않으며,
+ 요청된 실내지도 뷰를 포함하는 영역이 포커스되어야 그 뷰가 나타납니다. 단, 요청된 실내지도 뷰를 포함하는 영역이
+ 이미 포커스되어 있을 경우 즉시 그 뷰가 나타납니다.
+
+ @param indoorView 실내지도 뷰. 요청을 취소할 경우 `nil`.
+ */
+- (void)requestIndoorView:(NMFIndoorView * _Nullable)indoorView;
 
 
 
