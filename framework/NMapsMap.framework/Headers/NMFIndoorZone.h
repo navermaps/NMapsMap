@@ -1,5 +1,12 @@
-#import "NMFFoundation.h"
+//
+//  NMFIndoorZone.h
+//  dynamic
+//
+//  Created by Won-Young Son on 2018. 1. 8..
+//  Copyright © 2018년 NaverMap. All rights reserved.
+//
 
+#import <Foundation/Foundation.h>
 @class NMFIndoorLevel;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -10,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see `NMFIndoorRegion`
  */
-NMF_EXPORT
 @interface NMFIndoorZone : NSObject
 
 /**

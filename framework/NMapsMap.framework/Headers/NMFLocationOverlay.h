@@ -1,7 +1,7 @@
+
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
-
 #import "NMFOverlay.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,56 +33,64 @@ const static int NMF_LOCATION_OVERLAY_GLOBAL_Z_INDEX = 300000;
  - 보조 아이콘: 생략할 수 있습니다. 주 아이콘보다 약간 아래에 그려집니다. 이벤트를 받을 수 없습니다.
  - 원: 생략할 수 있습니다. 강조 효과를 위해 사용되며, 보조 아이콘 아래에 그려집니다. 이벤트를 받을 수 없습니다.
  */
-NMF_EXPORT
 @interface NMFLocationOverlay : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_LOCATION_OVERLAY_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  아이콘의 너비. pt 단위. `NMF_LOCATION_OVERLAY_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.
  
  기본값은 `NMF_LOCATION_OVERLAY_SIZE_AUTO`입니다.
  */
-@property(nonatomic) CGFloat iconWidth;
+@property (nonatomic) CGFloat iconWidth;
 
 /**
  이미지의 높이. pt 단위. `NMF_LOCATION_OVERLAY_SIZE_AUTO`일 경우 이미지의 눂이를 따릅니다.
  
  기본값은 `NMF_LOCATION_OVERLAY_SIZE_AUTO`입니다.
  */
-@property(nonatomic) CGFloat iconHeight;
+@property (nonatomic) CGFloat iconHeight;
 
 /**
  보조 아이콘의 너비. pt 단위. `NMF_LOCATION_OVERLAY_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.
  
  기본값은 `NMF_LOCATION_OVERLAY_SIZE_AUTO`입니다.
  */
-@property(nonatomic) CGFloat subIconWidth;
+@property (nonatomic) CGFloat subIconWidth;
 
 /**
  보조 이미지의 높이. pt 단위. `NMF_LOCATION_OVERLAY_SIZE_AUTO`일 경우 이미지의 눂이를 따릅니다.
  
  기본값은 `NMF_LOCATION_OVERLAY_SIZE_AUTO`입니다.
  */
-@property(nonatomic) CGFloat subIconHeight;
+@property (nonatomic) CGFloat subIconHeight;
 
 /**
  오버레이의 좌표.
  */
-@property(nonatomic, copy) NMGLatLng *location;
+@property (nonatomic, copy) NMGLatLng *location;
 
 /**
  방위. 도 단위. 방위가 북쪽일 경우 `0`도이며, 시계 방향으로 값이 증가합니다.
  
  기본값은 `0`입니다.
  */
-@property(nonatomic) CGFloat heading;
+@property (nonatomic) CGFloat heading;
 /**
  아이콘.
  */
-@property(nonatomic, strong) NMFOverlayImage *icon;
+@property (nonatomic, strong) NMFOverlayImage *icon;
 /**
  보조 아이콘.
  */
-@property(nonatomic, strong, nullable) NMFOverlayImage *subIcon;
+@property (nonatomic, strong, nullable) NMFOverlayImage *subIcon;
 
 /**
  아이콘의 앵커. 앵커는 아이콘 이미지에서 기준이 되는 지점을 의미합니다. 앵커로 지정된 지점이
@@ -91,7 +99,7 @@ NMF_EXPORT
  
  기본값은 `(0.5, 0.5)`입니다.
  */
-@property(nonatomic) CGPoint anchor;
+@property (nonatomic) CGPoint anchor;
 
 /**
  보조 아이콘의 앵커. 앵커는 보조 아이콘 이미지에서 기준이 되는 지점을 의미합니다. 앵커로 지정된 지점이
@@ -100,35 +108,35 @@ NMF_EXPORT
  
  기본값은 `(0.5, 1)`입니다.
  */
-@property(nonatomic) CGPoint subAnchor;
+@property (nonatomic) CGPoint subAnchor;
 
 /**
  원의 색상.
  
  기본값은 `NMF_LOCATION_OVERLAY_DEFAULT_COLOR`입니다.
  */
-@property(nonatomic, strong) UIColor *circleColor;
+@property (nonatomic, strong) UIColor *circleColor;
 
 /**
  원의 테두리 색상.
  
  기본값은 `UIColor.clearColor`입니다.
  */
-@property(nonatomic, strong) UIColor *circleOutlineColor;
+@property (nonatomic, strong) UIColor *circleOutlineColor;
 
 /**
  원의 외곽선 두께. pt 단위. `0`일 경우 테두리가 그려지지 않습니다.
  
  기본값은 `0`입니다.
  */
-@property(nonatomic) CGFloat circleOutlineWidth;
+@property (nonatomic) CGFloat circleOutlineWidth;
 
 /**
  원의 반경. pt 단위. `0`일 경우 원이 그려지지 않습니다.
  
  기본값은 `18`입니다.
  */
-@property(nonatomic) CGFloat circleRadius;
+@property (nonatomic) CGFloat circleRadius;
 
 /**
  유효한 현 위치의 기본 아이콘 이미지를 반환합니다.

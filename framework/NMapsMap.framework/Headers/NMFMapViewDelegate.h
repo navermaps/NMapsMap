@@ -9,9 +9,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class NMFIndoorRegion;
 
 /**
- `NMFMapView`에 관련된 업데이트 및 비동기 작업의 결과를 알려주는 콜백 메서드가 정의된 프로토콜. 이 프로토콜은 더이상 사용이 권장되지 않습니다. `NMFMapViewTouchDelegate`, `NMFMapViewCameraDelegate`, `NMFMapViewOptionDelegate`를 사용하세요.
+ `NMFMapView`에 관련된 업데이트 및 비동기 작업의 결과를 알려주는 콜백 메서드가 정의된 프로토콜.
  */
-__attribute__((deprecated("Use NMFMapViewTouchDelegate, NMFMapViewCameraDelegate or NMFMapViewOptionDelegate")))
 @protocol NMFMapViewDelegate <NSObject>
 
 @optional
@@ -43,14 +42,6 @@ __attribute__((deprecated("Use NMFMapViewTouchDelegate, NMFMapViewCameraDelegate
  @param reason 움직임의 원인.
  */
 - (void)mapView:(NMFMapView *)mapView regionDidChangeAnimated:(BOOL)animated byReason:(NSInteger)reason;
-
-/**
- 현재 진행 중인 지도 이동 애니메이션이 취소되었을때 호출되는 콜백 메서드.
- 
- @param mapView 영역이 변경되고 있었던 `NMFMapView` 객체.
- @param reason 취소된 원인.
- */
-- (void)mapViewCameraUpdateCancel:(NMFMapView *)mapView byReason:(NSInteger)reason;
 
 /**
  지도가 표시하고 있는 영역이 변경된 후 진행 중인 터치 이벤트가 없을 때 호출되는 콜백 메서드.

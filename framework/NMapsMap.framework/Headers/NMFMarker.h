@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
-
 #import "NMFOverlay.h"
 #import "NMFMarkerConstants.h"
 #import "NMFInfoWindow.h"
@@ -24,41 +23,49 @@ const static int NMF_MARKER_GLOBAL_Z_INDEX = 200000;
 /**
  파란색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
 /**
  회색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
 /**
  초록색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
 /**
  밝은파란색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
 /**
  핑크색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
 /**
  빨간색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_RED;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_RED;
 /**
  노란색 마커 이미지.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
 /**
  검은색 마커 이미지. 색상을 덧입히기에 적합합니다.
  */
-extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
+extern const NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
 
 /**
  아이콘과 캡션을 이용해 지도 위의 한 지점을 표시하는 오버레이.
  */
-NMF_EXPORT
 @interface NMFMarker : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_MARKER_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  사용자가 임의로 지정할 수 있는 태그. 마커를 그루핑하거나 구분하기 위한 목적으로 사용할 수 있습니다.
@@ -80,15 +87,11 @@ NMF_EXPORT
 
 /**
  아이콘의 너비. pt 단위. `NMF_MARKER_SIZE_AUTO`일 경우 이미지의 너비를 따릅니다.
- 
- 기본값은 `NMF_MARKER_SIZE_AUTO`입니다.
  */
 @property (nonatomic) CGFloat width;
 
 /**
  아이콘의 높이. pt 단위. `NMF_MARKER_SIZE_AUTO`일 경우 이미지의 높이를 따릅니다.
- 
- 기본값은 `NMF_MARKER_SIZE_AUTO`입니다.
  */
 @property (nonatomic) CGFloat height;
 
@@ -141,13 +144,6 @@ NMF_EXPORT
  기본값은 `NO`입니다.
  */
 @property (nonatomic) BOOL isForceShowIcon;
-
-/**
- 마커가 `isHideCollidedCaptions`이 `YES`인 다른 마커와 겹치더라도 캡션을 무조건 표시할지 여부.
- 
- 기본값은 `NO`입니다.
- */
-@property (nonatomic) BOOL isForceShowCaption;
 
 /**
  좌표. 마커를 지도에 추가하기 전에 반드시 이 속성에 값을 지정해야 합니다.
@@ -216,22 +212,6 @@ NMF_EXPORT
 @property(nonatomic) CGFloat captionRequestedWidth;
 
 /**
- 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 캡션의 최소 줌 레벨보다 작을 경우 아이콘만 나타나고
- 주 캡션 및 보조 캡션은 나타나지 않습니다.
- 
- 기본값은 `NMF_MIN_ZOOM`입니다.
- */
-@property(nonatomic) double captionMinZoom;
-
-/**
- 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 캡션의 최대 줌 레벨보다 클 경우 아이콘만 나타나고
- 주 캡션 및 보조 캡션은 나타나지 않습니다.
- 
- 기본값은 `NMF_MAX_ZOOM`입니다.
- */
-@property(nonatomic) double captionMaxZoom;
-
-/**
  보조 캡션의 텍스트. 보조 캡션은 주 캡션의 아래에 나타납니다. 빈 문자열일 경우 보조 캡션이 표시되지 않습니다.
  
  기본값은 빈 문자열입니다.
@@ -269,41 +249,11 @@ NMF_EXPORT
 @property(nonatomic) CGFloat subCaptionRequestedWidth;
 
 /**
- 보조 캡션이 보이는 최소 줌 레벨. 지도의 줌 레벨이 보조 캡션의 최소 줌 레벨보다 작을 경우 아이콘 및
- 주 캡션만 나타나고 보조 캡션은 나타나지 않습니다.
- 
- 기본값은 `NMF_MIN_ZOOM`입니다.
- */
-@property(nonatomic) double subCaptionMinZoom;
-
-/**
- 보조 캡션이 보이는 최대 줌 레벨. 지도의 줌 레벨이 보조 캡션의 최대 줌 레벨보다 클 경우 아이콘 및 주
- 캡션만 나타나고 보조 캡션은 나타나지 않습니다.
- 
- 기본값은 `NMF_MAX_ZOOM`입니다.
- */
-@property(nonatomic) double subCaptionMaxZoom;
-
-/**
  캡션 아이콘의 정렬 방향.
  
  기본값은 `NMFAlignBottom`입니다.
- 
- @warning Deprecated. `captionAligns` 속성을 사용하세요.
  */
-@property(nonatomic) NMFAlign captionAlign __deprecated_msg("Use `captionAligns` instead.");
-
-/**
- 캡션을 아이콘의 어느 방향에 위치시킬지를 지정합니다. 캡션은 `captionAligns` 배열에 지정된 순서대로 우선적으로
- 위치합니다. 만약 캡션이 다른 마커와 겹치지 않거나 겹치더라도 해당 마커의  `isHideCollidedCaptions`가
- `NO`라면 캡션은 반드시 `captionAligns[0]`에 위치합니다. 그렇지 않을 경우 겹치지 않은 다음
- 방향에 위치하며, 어느 방향으로 위치시켜도 다른 마커와 겹칠 경우 캡션이 숨겨집니다.
- 
- 기본값은 `NMFAlignType.bottom`입니다.
- 
- @see `NMFAlignType`
- */
-@property(nonatomic) NSArray<NMFAlignType *> *captionAligns;
+@property(nonatomic) NMFAlign captionAlign;
 
 /**
  아이콘과 캡션 간의 여백.
@@ -315,7 +265,7 @@ NMF_EXPORT
 /**
  마커에 열려 있는 정보 창.
 */
-@property (nonatomic, strong, nullable, readonly) NMFInfoWindow *infoWindow;
+@property (nonatomic, strong, readonly) NMFInfoWindow *infoWindow;
 
 /**
  위치를 지정하여 마커를 생성합니다.

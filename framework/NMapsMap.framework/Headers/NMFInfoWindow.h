@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
 #import "NMFOverlay.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,8 +20,16 @@ const static int NMF_INFO_WINDOW_GLOBAL_Z_INDEX = 400000;
  - 고정된 이미지를 지정하는 마커와 달리 이미지를 반환하는 어댑터를 지정할 수 있으므로, 객체/상황별로 다른 이미지를
  노출할 수 있습니다.
  */
-NMF_EXPORT
 @interface NMFInfoWindow : NMFOverlay
+
+/**
+ 전역 z 인덱스. 두 오버레이가 겹쳐진 경우, 전역 z 인덱스가 큰 오버레이가 작은 오버레이를 덮습니다.
+ 0 보다 작으면 지도 심벌에 의해 덮어지며, 0 보다 크거나 같으면 지도 심벌을 덮습니다.
+ 전역 Z 인덱스는 이종의 오버레이 간에도 유효합니다.
+ 
+ 기본값은 `NMF_INFO_WINDOW_GLOBAL_Z_INDEX`입니다.
+ */
+@property (nonatomic) NSInteger globalZIndex;
 
 /**
  불투명도. `0`일 경우 완전히 투명, `1`일 경우
@@ -35,12 +42,12 @@ NMF_EXPORT
 /**
  정보 창에서 사용할 이미지를 제공해 줄 수 있는 이미지 데이터 소스.
  */
-@property(nonatomic) id<NMFOverlayImageDataSource> dataSource;
+@property(nonatomic, weak) id<NMFOverlayImageDataSource> dataSource;
 
 /**
  정보 창이 열려 있는 마커.
  */
-@property(nonatomic, nullable, readonly) NMFMarker *marker;
+@property(nonatomic, readonly) NMFMarker *marker;
 
 /**
  좌표. 좌표는 `-openWithMapView:`를 이용해 정보 창을 여는 경우 사용되며, `-openWithMarker:`를
@@ -81,7 +88,7 @@ NMF_EXPORT
 + (instancetype)infoWindow;
 
 /**
- 정보 창을 `marker`의 위에 엽니다. `-openWithMarker:marker alignType:NMFAlignType.top`과 동일합니다.
+ 정보 창을 `marker`의 위에 엽니다. `-openWithMarker:marker align:NMFAlignTop`과 동일합니다.
  
  정보 창을 마커 위에 열기 전에는 반드시 `dataSource`를 지정해야 합니다.
  
@@ -97,23 +104,8 @@ NMF_EXPORT
  
  @param marker 정보 창을 열 마커.
  @param align 정보 창을 열 방향.
- 
- @warning Deprecated. `openWithMarker:alignType:`을 사용하세요.
  */
-- (void)openWithMarker:(NMFMarker *)marker align:(NMFAlign)align __deprecated_msg("Use `openWithMarker:alignType:` instead.");
-
-/**
- 정보 창을 `marker`에 엽니다. 정보 창을 열 마커는 반드시 지도에 추가된 상태여야 하며, 그렇지 않을 경우
- 무시됩니다. `alignType`을 이용하면 마커의 어느 방향에 정보 창의 앵커를 위치시킬지 지정할 수 있습니다.
- 
- 정보 창을 마커 위에 열기 전에는 반드시 `dataSource`를 지정해야 합니다.
- 
- @param marker 정보 창을 열 마커.
- @param alignType 정보 창을 열 방향.
- 
- @see `NMFAlignType`
- */
-- (void)openWithMarker:(NMFMarker *)marker alignType:(NMFAlignType *)alignType;
+- (void)openWithMarker:(NMFMarker *)marker align:(NMFAlign)align;
 
 /**
  정보 창을 `position` 지점에 엽니다.

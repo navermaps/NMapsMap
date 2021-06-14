@@ -13,7 +13,6 @@
 /**
  폴리곤을 나타내는 클래스.
  */
-NMF_EXPORT
 @interface NMGPolygon<__covariant PointType> : NSObject <NMGGeometry>
 
 /**

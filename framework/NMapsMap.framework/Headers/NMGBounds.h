@@ -14,7 +14,6 @@
  지도에 보여지는 사각형 영역을 정의한 Bounds.
  NMGBounds는 평면직교 좌표계에 대한 클래스입니다.
  */
-NMF_EXPORT
 @interface NMGBounds : NSObject <NMGBoundable>
 
 @property (nonatomic, nonnull) NMGPoint *min;

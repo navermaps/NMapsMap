@@ -13,7 +13,6 @@
 /**
  라인스트링을 표현하는 클래스.
  */
-NMF_EXPORT
 @interface NMGLineString<__covariant PointType> : NSObject <NMGMultiPointable>
 
 /**

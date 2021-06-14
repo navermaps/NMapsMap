@@ -1,11 +1,18 @@
-#import "NMFFoundation.h"
+//
+//  NMFIndoorView.h
+//  dynamic
+//
+//  Created by Won-Young Son on 2018. 1. 8..
+//  Copyright © 2018년 NaverMap. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  하나의 실내지도를 나타내는 불변 클래스.
  */
-NMF_EXPORT
 @interface NMFIndoorView : NSObject
 
 /**

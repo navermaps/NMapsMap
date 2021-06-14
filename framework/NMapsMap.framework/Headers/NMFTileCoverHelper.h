@@ -1,4 +1,4 @@
-#import "NMFFoundation.h"
+#import <Foundation/Foundation.h>
 
 @class NMFMapView;
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  전체 타일 대신 변경사항이 있는 타일만을 처리하면 되므로 `-getCoveringTileIds`를 직접 사용하는 것에
  비해 효율적입니다.
  */
-NMF_EXPORT
+
 @interface NMFTileCoverHelper : NSObject
 
 /**
@@ -43,8 +43,9 @@ NMF_EXPORT
 @property(nonatomic, weak) NMFMapView *mapView;
 
 /**
- 타일 목록을 갱신할 때 `-mapViewCameraIdle:` 대신 `-mapView:cameraIsChangingByReason:`을 사용할지 여부를 설정합니다.
- `-mapView:cameraIsChangingByReason:`을 사용하면 목록이 더 빠르게 갱신되지만 성능이 하락합니다.
+ 타일 목록을 갱신할 때 `-mapViewIdle:` 대신 `-mapViewRegionIsChanging::`를
+ 사용할지 여부를 설정합니다. `-mapViewRegionIsChanging::`를 사용하면 목록이 더 빠르게 갱신되지만
+ 성능이 하락합니다.
  기본값 `NO`.
  */
 @property(nonatomic) BOOL isUpdateOnChange;

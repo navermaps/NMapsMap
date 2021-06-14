@@ -1,3 +1,10 @@
+//
+//  NMFAuthManager.h
+//  dynamic
+//
+//  Created by Won-Young Son on 2018. 3. 9..
+//  Copyright © 2018년 NaverMap. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 
@@ -40,7 +47,6 @@ typedef NS_ENUM(NSInteger, NMFAuthState) {
     - 앱의 info.plist에 `NMFClientId`를 String으로 지정합니다.
     - 싱글턴 객체인 `shared`에서 `clientId`를 명시적으로 지정합니다.
  */
-NMF_EXPORT
 @interface NMFAuthManager : NSObject
 
 /**

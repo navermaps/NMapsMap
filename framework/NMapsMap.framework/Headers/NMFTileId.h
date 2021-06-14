@@ -1,4 +1,4 @@
-#import "NMFFoundation.h"
+#import <Foundation/Foundation.h>
 
 @class NMGWebMercatorCoord;
 @class NMGLatLng;
@@ -10,7 +10,7 @@
  `long` 타입으로 표현됩니다. 이 클래스의 메서드를 사용해 `long` 타입의 타일 ID로부터 각 성분을
  추출하거나 각 성분으로부터 타일 ID를 조합할 수 있습니다.
  */
-NMF_EXPORT
+
 @interface NMFTileId : NSObject
 
 /**
@@ -57,10 +57,10 @@ NMF_EXPORT
 + (long)tileIdFromZ:(NSUInteger)z WithCoord:(NMGWebMercatorCoord * _Nonnull)coord;
 
 /**
- `latLng` 좌표가 위치한 곳의 `z` 레벨 타일 ID를 반환합니다.
+ `coord` 좌표가 위치한 곳의 `z` 레벨 타일 ID를 반환합니다.
  
  @param z 줌 레벨.
- @param latLng 좌표.
+ @param coord 좌표.
  @return 타일 ID.
  */
 + (long)tileIdFromZ:(NSUInteger)z WithLatLng:(NMGLatLng * _Nonnull)latLng;

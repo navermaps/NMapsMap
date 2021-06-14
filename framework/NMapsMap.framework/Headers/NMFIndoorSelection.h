@@ -1,4 +1,12 @@
-#import "NMFFoundation.h"
+//
+//  NMFIndoorSelection.h
+//  sdk
+//
+//  Created by Won-Young Son on 2018. 8. 22..
+//  Copyright © 2018년 NaverMap. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
 
 @class NMFIndoorRegion;
 @class NMFIndoorZone;
@@ -7,7 +15,6 @@
 /**
  하나의 실내지도 영역 내에서 선택된 구역 및 층을 나타내는 불변 클래스.
  */
-NMF_EXPORT
 @interface NMFIndoorSelection : NSObject
 
 /**

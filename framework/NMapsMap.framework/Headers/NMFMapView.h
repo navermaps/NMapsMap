@@ -1,8 +1,8 @@
+#import "NMFGeometry.h"
+
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "NMFGeometry.h"
-#import "NMFMyPositionMode.h"
 #import "NMFFoundation.h"
 #import "NMFTypes.h"
 
@@ -17,66 +17,43 @@ NS_ASSUME_NONNULL_BEGIN
 @class NMFProjection;
 
 @protocol NMFMapViewDelegate;
-@protocol NMFMapViewTouchDelegate;
-@protocol NMFMapViewCameraDelegate;
-@protocol NMFMapViewOptionDelegate;
 @protocol NMFPickable;
-
-/**
- 기본 밝은 배경색.
- */
-extern NMF_EXPORT UIColor *const NMFDefaultBackgroundLightColor;
-
-/**
- 기본 어두운 배경색.
- */
-extern NMF_EXPORT UIColor *const NMFDefaultBackgroundDarkColor;
-
-/**
- 기본 밝은 배경 이미지.
- */
-extern NMF_EXPORT UIImage *const NMFDefaultBackgroundLightImage;
-
-/**
- 기본 어두운 배경 이미지.
- */
-extern NMF_EXPORT UIImage *const NMFDefaultBackgroundDarkImage;
 
 /**
  건물 레이어 그룹. 기본적으로 활성화됩니다.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_BUILDING;
+extern NSString *const NMF_LAYER_GROUP_BUILDING;
 
 /**
  대중교통 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_TRANSIT;
+extern NSString *const NMF_LAYER_GROUP_TRANSIT;
 
 /**
  자전거도로 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_BICYCLE;
+extern NSString *const NMF_LAYER_GROUP_BICYCLE;
 
 /**
  실시간 교통정보 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_TRAFFIC;
+extern NSString *const NMF_LAYER_GROUP_TRAFFIC;
 
 /**
  지적편집도 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_CADASTRAL;
+extern NSString *const NMF_LAYER_GROUP_CADASTRAL;
 
 /**
  등산로 레이어 그룹.
  @see `NMFMapView.setLayerGroup(:isEnabled:)`
  */
-extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_MOUNTAIN;
+extern NSString *const NMF_LAYER_GROUP_MOUNTAIN;
 
 /**
  지도 유형을 나타내는 열거형.
@@ -92,9 +69,7 @@ typedef NS_ENUM(NSInteger, NMFMapType) {
     /** 위성 지도(겹쳐보기). */
     NMFMapTypeHybrid,
     /** 지형도. */
-    NMFMapTypeTerrain,
-    /** 없음. 지도는 나타나지 않고 오버레이만이 나타납니다. */
-    NMFMapTypeNone
+    NMFMapTypeTerrain
 };
 
 /**
@@ -122,44 +97,11 @@ NMF_EXPORT IB_DESIGNABLE
 #pragma mark Accessing the Delegate
 
 /**
- `NMFMapView`의 위임자. 이 속성은 더이상 사용이 권장되지 않습니다. 대신 `touchDelegate`, `addCameraDelegate`/`removeCameraDelegate`, `addOptionDelegate`/`removeOptionDelegate`를 사용하세요.
+ `NMFMapView`의 위임자.
  
- 만약 `delegate`와 `touchDelegate`가 모두 지정되면 `delegate`는 무시되고 `touchDelegate`만이 동작합니다.
+ 지도 뷰의 위임자를 이용해 지도에 오버레이와 관련된 정보나 화면 갱신 여부 등의 메시지를 전달합니다.
  */
-@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewDelegate> delegate __attribute__((deprecated("Use touchDelegate, addCameraDelegate/removeCameraDelegate or addOptionDelegate/removeOptionDelegate")));
-
-/**
- 지도 터치에 대한 위임자. 지도 탭, 심벌 탭 등 지도와 관련된 터치 이벤트가 전달됩니다.
- */
-@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewTouchDelegate> touchDelegate;
-
-/**
- 카메라의 움직임에 대한 위임자를 등록합니다.
- 
- @param delegate `NMFMapViewCameraDelegate` 객체.
- */
-- (void)addCameraDelegate:(id<NMFMapViewCameraDelegate> _Nonnull)delegate NS_SWIFT_NAME(addCameraDelegate(delegate:));
-
-/**
- 카메라의 움직임에 대한 위임자를 해제합니다.
- 
- @param delegate `NMFMapViewCameraDelegate` 객체.
- */
-- (void)removeCameraDelegate:(id<NMFMapViewCameraDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeCameraDelegate(delegate:));
-
-/**
- 지도 옵션 변경에 대한 위임자를 등록합니다.
-
- @param delegate `NMFMapViewOptionDelegate` 객체.
- */
-- (void)addOptionDelegate:(id<NMFMapViewOptionDelegate> _Nonnull)delegate NS_SWIFT_NAME(addOptionDelegate(delegate:));
-
-/**
- 지도 옵션 변경에 대한 위임자를 해제합니다.
- 
- @param delegate `NMFMapViewOptionDelegate` 객체.
- */
-- (void)removeOptionDelegate:(id<NMFMapViewOptionDelegate> _Nonnull)delegate NS_SWIFT_NAME(removeOptionDelegate(delegate:));
+@property(nonatomic, weak, nullable) IBOutlet id<NMFMapViewDelegate> delegate;
 
 #pragma mark Configuring the Map’s Appearance
 
@@ -172,7 +114,7 @@ NMF_EXPORT IB_DESIGNABLE
  <li>줌 레벨이 커지거나 작아지면 지도 심벌도 일정 정도 함께 커지거나 작아집니다.</li>
  <li>`mapType` 지도 유형을 사용할 수 없습니다.</li>
  <li>`setLayerGroup:isEnabled:`, `getLayerGroupEnabled:`, `indoorMapEnabled`, `nightModeEnabled`, `lightness`, `buildingHeight`, `symbolScale`, `symbolPerspectiveRatio`가 동작하지 않습니다.</li>
- <li>`NMFMapViewTouchDelegate.mapView:didTapSymbol:`이 호출되지 않습니다.</li>
+ <li>`NMFMapViewDelegate.mapView:didTapSymbol:`이 호출되지 않습니다.</li>
  <li>`NMFMarker.isHideCollidedSymbols`가 동작하지 않습니다.</li>
  </ul>
  기본값은 `NO`입니다.
@@ -187,11 +129,16 @@ NMF_EXPORT IB_DESIGNABLE
 /**
  지도의 배경 이미지. 배경은 해당 지역의 지도 데이터가 없거나 로딩 중일 때 나타납니다.
  */
-@property (nonatomic, nullable) UIImage *backgroundImage;
+@property (nonatomic) UIImage *backgroundImage;
+
+/**
+ 지도 콘텐츠 영역에 대한 `NMGLatLngBounds`.
+ */
+@property (nonatomic, readonly, copy) NMGLatLngBounds *contentBounds;
 
 /**
  지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다. 따라서 패딩을 변경하면 비록 화면에 나타나는 지도의 모습은 변하지 않지만
- 카메라의 위치는 변경되며, `NMFMapViewCameraDelegate`의 메서드가 호출됩니다.
+ 카메라의 위치는 변경되며, `mapView(:regionWillChangeAnimated:byReason:)`이 호출됩니다.
 */
 @property (nonatomic, assign) UIEdgeInsets contentInset;
 
@@ -211,14 +158,6 @@ NMF_EXPORT IB_DESIGNABLE
  기본값은 `NMFMapTypeBasic`입니다.
  */
 @property(nonatomic) NMFMapType mapType;
-
-/**
- 지도가 어두운지 여부를 반환합니다. 야간 모드가 활성화되어 있거나 지도의 유형이 `NMFMapTypeSatellite`
- 또는 `NMFMapTypeHybrid`일 경우 어두운 것으로 간주됩니다.
- 
- @return 어두울 경우 `YES`, 그렇지 않을 경우 `NO`.
- */
-- (BOOL)isDark;
 
 /**
  레이어 그룹을 활성화할지 여부를 지정합니다.
@@ -453,48 +392,31 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
 @property (nonatomic, nullable) NMGLatLngBounds *extent;
 
 /**
- 지도의 콘텐츠 영역 중심에 대한 카메라 위치.
- */
-@property (nonatomic, copy, readonly) NMFCameraPosition *cameraPosition;
-
-/**
- 지도의 콘텐츠 영역에 대한 `NMGLatLngBounds`.  콘텐츠 패딩이 모두 `0`이면 `coveringBounds`와 동일한 영역이,
- 콘텐츠 패딩이 지정되어 있으면 `coveringBounds`에서 콘텐츠 패딩을 제외한 영역이 반환됩니다.
- */
-@property (nonatomic, readonly, copy) NMGLatLngBounds *contentBounds;
-
-/**
- 지도의 콘텐츠 영역에 대한 폴리곤 객체.  콘텐츠 패딩이 모두 `0`이면 `coveringRegion`과 동일한 폴리곤이,
- 콘텐츠 패딩이 지정되어 있으면 `coveringRegion`에서 콘텐츠 패딩을 제외한 폴리곤이 반환됩니다.
+ 지도의 콘텐츠 영역에 대한 폴리곤 객체.
  */
 @property (nonatomic, copy, readonly) NMGPolygon *contentRegion;
 
 /**
- 콘텐츠 패딩을 포함한 지도의 뷰 전체 영역에 대한 `NMGLatLngBounds`.
- */
-@property (nonatomic, readonly, copy) NMGLatLngBounds *coveringBounds;
-
-/**
- 콘텐츠 패딩을 포함한 지도의 뷰 전체 영역에 대한 폴리곤 객체.
- */
-@property (nonatomic, copy, readonly) NMGPolygon *coveringRegion;
-
-/**
- 콘텐츠 패딩을 포함한 지도의 뷰 전체를 완전히 덮는 타일 ID의 목록을 반환합니다.
+ 현재 화면을 커버하는 타일 ID의 목록을 반환합니다.
  
- @return 타일 ID의 목록.
+ @return 타일 ID의 목록
  @see NMFTileId
  */
 - (NSArray<NSNumber *> *)getCoveringTileIds;
 
 /**
- 콘텐츠 패딩을 포함한 지도의 뷰 전체를 완전히 덮는 `zoom` 레벨 타일 ID의 목록을 반환합니다.
+ 현재 화면을 커버하는 `zoom` 레벨 타일 ID의 목록을 반환합니다.
  
  @param zoom 줌 레벨.
- @return 타일 ID의 목록.
+ @return 타일 ID의 목록
  @see NMFTileId
  */
 - (NSArray<NSNumber *> *)getCoveringTileIdsAtZoom:(NSInteger)zoom;
+
+/**
+ 지도의 콘텐츠 영역 중심에 대한 카메라 위치.
+ */
+@property (nonatomic, copy, readonly) NMFCameraPosition *cameraPosition;
 
 /**
  이 지도에 대한 `NMFProjection` 객체. 항상 같은 객체가 반환됩니다.
@@ -522,20 +444,6 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  현재 진행 중인 지도 이동 애니메이션을 취소합니다.
  */
 - (void)cancelTransitions;
-
-/**
- 현재 진행 중인 지도 이동 애니메이션을 취소합니다.
- 
- @param reason 취소의 원인.
- */
-- (void)cancelTransitions:(NSInteger)reason;
-
-/**
- 위치 추적 모드.
- 
- `NMFMyPositionMode` 객체.
- */
-@property(nonatomic) NMFMyPositionMode positionMode;
 
 #pragma mark Symbol
 
@@ -575,6 +483,7 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  @return 오버레이 또는 심벌. point에 존재하는 오버레이 또는 심벌이 없을 경우 nil.
  */
 - (nullable id<NMFPickable>)pick:(CGPoint)point;
+
 
 @end
 

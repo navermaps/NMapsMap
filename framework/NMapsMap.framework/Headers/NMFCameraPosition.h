@@ -1,6 +1,5 @@
+#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
-#import "NMFFoundation.h"
 
 @class NMGLatLng;
 
@@ -9,7 +8,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  카메라의 위치 관련 정보를 나타내는 불변 클래스. 카메라의 위치는 좌표, 줌 레벨, 기울기 각도, 헤딩 각도로 구성됩니다.
  */
-NMF_EXPORT
 @interface NMFCameraPosition : NSObject <NSSecureCoding, NSCopying>
 
 /**
@@ -48,7 +46,7 @@ NMF_EXPORT
  좌표와 줌 레벨로부터 객체를 생성합니다. `tilt`와 `heading`은 `0`으로 지정됩니다.
  
  @param target 카메라의 좌표.
- @param zoom 카메라의 줌 레벨.
+ @param heading 카메라의 베어링 각도.
  
  @return `NMFCameraPosition` 객체.
  */

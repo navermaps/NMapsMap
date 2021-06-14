@@ -1,11 +1,9 @@
+#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
-#import "NMFFoundation.h"
 
 @class NMGLatLng;
 @protocol NMFLocationManagerDelegate;
 
-NMF_EXPORT
 @interface NMFLocationManager : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, getter=isUpdatingLocation) BOOL updatingLocation;
