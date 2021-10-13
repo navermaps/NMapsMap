@@ -27,6 +27,11 @@ const static double NMF_MINIMUM_TILT = 0.0;
 const static double NMF_MAXIMUM_TILT = 63.0;
 
 /**
+ 기본 최대 기울기 각도.
+ */
+const static double NMF_DEFAULT_MAXIMUM_TILT = 60.0;
+
+/**
  기본 애니메이션 시간을 의미하는 상수. 애니메이션 시간이 이 값으로 지정되었을 경우
  `NMFMapView.animationDuration`으로 지정된 시간이 적용됩니다.
  */

@@ -468,6 +468,14 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
 @property (nonatomic) double maxZoomLevel;
 
 /**
+ 지도의 최대 기울기 각도.
+ 
+ 기본값은 `60`입니다.
+ */
+@property (nonatomic) double maxTilt;
+
+
+/**
  지도의 제한 영역.
  
  기본값은 제한이 없음을 의미하는 `nil`입니다.

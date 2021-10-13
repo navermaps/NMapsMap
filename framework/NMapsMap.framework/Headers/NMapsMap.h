@@ -11,8 +11,6 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 #import "NMapsGeometry.h"
 #import "NMFUtils.h"
 
-#import "NMFRendererSelection.h"
-
 #import "NMFAuthManager.h"
 #import "NMFNaverMapView.h"
 

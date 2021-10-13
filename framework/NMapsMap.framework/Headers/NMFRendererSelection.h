@@ -10,6 +10,9 @@ typedef NS_ENUM(NSInteger, NMFRendererType) {
 NMF_EXPORT
 @interface NMFRendererSelection : NSObject
 
+@property (class, nonatomic, readonly, nonnull) NMFRendererSelection *shared;
+@property (nonatomic, assign) NMFRendererType rendererType;
+
 @end
 
 NS_ASSUME_NONNULL_END

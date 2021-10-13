@@ -19,8 +19,7 @@ NMF_EXPORT
 @interface NMFArrowheadPath : NMFOverlay
 
 /**
- 색상. 색상은 반투명일 수 없으며, 완전히 투명하거나 완전히 불투명해야 합니다. 색상의
- 알파가 `0`이 아닌 경우 완전히 불투명한 것으로 간주됩니다. 색상이 투명할 경우 테두리도 그려지지 않습니다.
+ 색상.
  
  기본값은 `UIColor.whiteColor`입니다.
  */
@@ -59,6 +58,13 @@ NMF_EXPORT
  기본값은 `2.5`입니다.
  */
 @property(nonatomic) CGFloat headSizeRatio;
+
+/**
+ 높이. pt 단위.
+
+ 기본값은 `0`입니다.
+ */
+@property(nonatomic) CGFloat elevation;
 
 /**
  좌표열을 지정하여 화살표 오버레이를 생성합니다. `points`의 크기는 `2` 이상이어야 합니다.
