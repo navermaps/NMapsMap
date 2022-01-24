@@ -1,6 +1,6 @@
 #import "NMFOverlayImage.h"
 
-#import <UIKit/UIkit.h>
+#import <UIKit/UIKit.h>
 
 #import "NMFFoundation.h"
 
