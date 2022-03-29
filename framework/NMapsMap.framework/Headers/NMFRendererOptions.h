@@ -8,10 +8,11 @@ typedef NS_ENUM(NSInteger, NMFRendererType) {
 };
 
 NMF_EXPORT
-@interface NMFRendererSelection : NSObject
+@interface NMFRendererOptions : NSObject
 
-@property (class, nonatomic, readonly, nonnull) NMFRendererSelection *shared;
+@property (class, nonatomic, readonly, nonnull) NMFRendererOptions *shared;
 @property (nonatomic, assign) NMFRendererType rendererType;
+@property (nonatomic, assign) BOOL msaa4x;
 
 @end
 
