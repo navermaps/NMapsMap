@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-
 #import "NMFFoundation.h"
 
 // Project version number for NaverMap Framework.
@@ -16,6 +14,7 @@ FOUNDATION_EXPORT NMF_EXPORT const unsigned char NaverMapFrameworVersionString[]
 
 #import "NMFPickable.h"
 #import "NMFLocationManager.h"
+#import "NMFRendererOptions.h"
 #import "NMFMapView.h"
 #import "NMFMapView+IBAdditions.h"
 #import "NMFMapViewDelegate.h"

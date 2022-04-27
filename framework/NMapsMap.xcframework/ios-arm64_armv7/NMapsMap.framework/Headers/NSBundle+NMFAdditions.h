@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-static inline NSString* NMFLocalizedString(NSString *key, NSString * _Nullable comment) {
+static inline NSString* NMFLocalizedString(NSString *key, NSString * _Nullable comment) NS_SWIFT_UNAVAILABLE("Not use in swift.") {
     return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:nil];
 }
 
-static inline NSString* NMFLocalizedStringFromTable(NSString *key, NSString *tbl, NSString * _Nullable comment) {
+static inline NSString* NMFLocalizedStringFromTable(NSString *key, NSString *tbl, NSString * _Nullable comment) NS_SWIFT_UNAVAILABLE("Not use in swift.") {
     return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:@"" table:(tbl)];
 }
 
-static inline NSString* NMFLocalizedStringWithDefaultValue(NSString *key, NSString * _Nullable tbl, NSBundle * _Nullable bundle, NSString *val, NSString * _Nullable comment) {
+static inline NSString* NMFLocalizedStringWithDefaultValue(NSString *key, NSString * _Nullable tbl, NSBundle * _Nullable bundle, NSString *val, NSString * _Nullable comment) NS_SWIFT_UNAVAILABLE("Not use in swift.") {
     return [[NSBundle naverMapFrameworkBundle] localizedStringForKey:(key) value:(val) table:(tbl)];
 }
 
