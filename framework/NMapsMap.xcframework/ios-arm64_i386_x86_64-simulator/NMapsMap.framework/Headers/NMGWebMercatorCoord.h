@@ -97,6 +97,15 @@ NMF_EXPORT
 - (double)distanceTo:(nonnull NMGWebMercatorCoord *)other;
 
 /**
+ 다른 좌표와의 거리의 제곱을 구합니다. 거리 비교의 목적으로
+ `-distanceTo:(NMGWebMercatorCoord *)`에서 제곱근까지 구할 필요가 없을 때 사용하면 좋습니다.
+ 
+ @param other 다른 좌표.
+ @return 거리. 미터 단위.
+ */
+- (double)squareDistanceTo:(nonnull NMGWebMercatorCoord *)other;
+
+/**
  다른 좌표와의 각도를 구합니다. 다른 좌표가 현재 좌표의 정북 방향에 있을 경우 <code>0</code>도이며, 시계 방향으로
  각도가 증가합니다.
  

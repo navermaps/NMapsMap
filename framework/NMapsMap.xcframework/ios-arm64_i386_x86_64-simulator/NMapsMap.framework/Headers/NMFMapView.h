@@ -189,10 +189,24 @@ NMF_EXPORT IB_DESIGNABLE
 @property (nonatomic, nullable) UIImage *backgroundImage;
 
 /**
- 지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다. 따라서 패딩을 변경하면 비록 화면에 나타나는 지도의 모습은 변하지 않지만
- 카메라의 위치는 변경되며, `NMFMapViewCameraDelegate`의 메서드가 호출됩니다.
+ 지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다.
+ 이 속성을 변경하여 패딩을 지정하면 카메라의 좌표가 변경됩니다. 즉, `setContentInset:contentInset keepCamera:NO`와 동일합니다.
 */
 @property (nonatomic, assign) UIEdgeInsets contentInset;
+
+/**
+ 지도의 패딩. 패딩에 해당하는 부분은 지도의 콘텐츠 영역에서 제외됩니다.
+
+ `keepCamera`에 따라 카메라의 좌표 또는 지도의 영역이 유지됩니다.
+ - `YES`인 경우: 카메라의 좌표를 유지하며 콘텐츠 영역을 변경합니다. 따라서 화면에 나타나는 지도의 전체 영역이 변경됩니다.
+ 카메라에 변화가 없으므로 `NMFMapViewCameraDelegate`의 메서드가 호출되지 않습니다.
+ - `NO`인 경우: 화면에 나타나는 지도의 전체 영역을 유지하며 콘텐츠 영역을 변경합니다.
+ 카메라의 좌표는 새로운 콘텐츠 영역의 중심을 가리키도록 변경되며, `NMFMapViewCameraDelegate`의 메서드가 호출됩니다.
+
+ @param contentInset 패딩.
+ @param keepCamera 카메라의 좌표를 유지할지 여부. 유지할 경우 `YES`, 그렇지 않을 경우 `NO`.
+*/
+- (void)setContentInset:(UIEdgeInsets)contentInset keepCamera:(BOOL)keepCamera;
 
 /**
  지도 뷰의 화면상 너비. pt 단위.

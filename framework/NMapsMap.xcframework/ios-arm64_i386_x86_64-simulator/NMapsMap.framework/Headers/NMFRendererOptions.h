@@ -32,7 +32,7 @@ NMF_EXPORT
 /**
  지도 렌더러 유형을 지정하거나 반환합니다. 디바이스가 `NMFRendererTypeMetal`을 지원하지 않으면 `NMFRendererTypeOpenGL`이 지정됩니다.
 
- 기본값은 `NMFRendererTypeOpenGL`입니다.
+ 시뮬레이터에서 구동하는 경우의 기본값은 `NMFRendererTypeMetal`, 디바이스에서 구동하는 경우의 기본값은 `NMFRendererTypeOpenGL` 입니다.
  */
 @property (nonatomic, assign) NMFRendererType rendererType;
 

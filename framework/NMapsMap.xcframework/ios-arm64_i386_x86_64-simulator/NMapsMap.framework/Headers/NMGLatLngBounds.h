@@ -70,7 +70,33 @@ NMF_EXPORT
 @property (nonatomic, readonly, nonnull) NSArray<NMGLatLng *> *boundsLatLngs;
 
 + (nonnull instancetype)bounds;
-+ (nonnull instancetype)latLngBoundsSouthWest:(nonnull NMGLatLng *)sourthWest northEast:(nonnull NMGLatLng *)northEast;
+
+/**
+ `latLngs`의 좌표를 모두 포함하는 최소한의 `NMGLatLngBounds` 객체를 생성합니다.
+
+ @param latLngs 포함할 좌표들
+ @return `NMGLatLngBounds` 객체
+*/
++ (nonnull instancetype)latLngBoundsWithLatLngs:(nonnull NSArray<NMGLatLng *> *)latLngs;
+
+/**
+* 남서쪽과 북동쪽 좌표로부터 객체를 생성합니다.
+ 
+ @param southWest 남서쪽 좌표.
+ @param northEast 북동쪽 좌표.
+ @return `NMGLatLngBounds` 객체
+*/
++ (nonnull instancetype)latLngBoundsSouthWest:(nonnull NMGLatLng *)southWest northEast:(nonnull NMGLatLng *)northEast;
+
+/**
+* 남서쪽과 북동쪽 좌표로부터 객체를 생성합니다.
+ 
+ @param southWestLat 남서쪽 좌표의 위도
+ @param southWestLng 남서쪽 좌표의 경도
+ @param northEastLat 북동쪽 좌표의 위도
+ @param northEastLng 북동쪽 좌표의 경도
+ @return `NMGLatLngBounds` 객체
+*/
 + (nonnull instancetype)latLngBoundsWithSouthWestLat:(double)southWestLat southWestLng:(double)southWestLng northEastLat:(double)northEastLat northEastLng:(double)northEastLng;
 
 /**
