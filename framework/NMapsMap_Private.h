@@ -152,19 +152,38 @@ typedef NSString*__nonnull(^NMFAuthHMACBlockType) (NSString * __nonnull url);
 @end
 
 
+#pragma mark - NMFSource & NMFTileSource hidden API
+
+@interface NMFTileset : NSObject
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *tiles;
+@property (nonatomic, readonly) NSString *version;
+@end
+
+@interface NMFSource : NSObject
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, readonly) BOOL loaded;
+@end
+
+@interface NMFTileSource : NMFSource
+@property (nonatomic, readonly, nullable) NMFTileset *appliedTileset;
+@property (nonatomic, copy, nullable, readonly) NSURL *configurationURL;
+@end
+
+
 #pragma mark - NMFStyle & NMFStyleLayer hidden API
 
-@interface NMFStyleLayer : NSObject
-@property (nonatomic, assign, getter=isVisible) BOOL visible;
-@end
+@class NMFStyleLayer;
 
 @interface NMFStyle : NSObject
 @property (readonly, copy, nullable) NSString *name;
+@property (nonatomic, strong) NSArray<__kindof NMFStyleLayer *> *layers;
 - (nullable NMFStyleLayer *)layerWithIdentifier:(NSString *)identifier;
+- (nullable NMFSource *)sourceWithIdentifier:(NSString *)identifier;
+- (void)addLayer:(NMFStyleLayer *)layer;
+- (void)insertLayer:(NMFStyleLayer *)layer atIndex:(NSUInteger)index;
 - (void)insertLayer:(NMFStyleLayer *)layer belowLayer:(NMFStyleLayer *)sibling;
-@end
-
-@interface NMFOpenGLStyleLayer : NMFStyleLayer
+- (void)insertLayer:(NMFStyleLayer *)layer aboveLayer:(NMFStyleLayer *)sibling;
+- (void)loadSource:(NMFSource *)source;
 @end
 
 
@@ -239,6 +258,14 @@ typedef NSString*__nonnull(^NMFAuthHMACBlockType) (NSString * __nonnull url);
  @param style 로드된 style.
  */
 - (void)mapViewDidFinishLoadingStyle:(NMFMapView *)mapView style:(NMFStyle *)style;
+
+/**
+ source 로딩이 끝났을 때 호출됩니다.
+ 
+ @param mapView source가 로딩되는 맵뷰.
+ @param source 로드된 source.
+ */
+- (void)mapViewDidFinishLoadingSource:(NMFMapView *)mapView source:(NMFSource *)source;
 
 /**
  실내지도를 켰을 때 호출됩니다.
@@ -352,7 +379,8 @@ extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_AIRVIEW;
 /**
  private delegate
  */
-@property(nonatomic, weak, nullable) id<NMFMapViewPrivateDelegate> privateDelegate;
+- (void)addPrivateDelegate:(id<NMFMapViewPrivateDelegate> _Nonnull)delegate NS_SWIFT_NAME(addPrivateDelegate(delegate:));
+- (void)removePrivateDelegate:(id<NMFMapViewPrivateDelegate> _Nonnull)delegate NS_SWIFT_NAME(removePrivateDelegate(delegate:));
 
 /**
  이 지도의 `NMFStyle` 객체. 항상 같은 객체가 반환됩니다.
@@ -368,6 +396,10 @@ extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_AIRVIEW;
  만약 styleURL을 nil로 정의하게 되면 기본 스타일이 적용됩니다.
  */
 @property (nonatomic, null_resettable) NSURL *styleURL;
+
+@property (nonatomic, nullable) NSArray<NSString *> *styleUrlStrings;
+
+- (void)applyStyle;
 
 /**
  지도 스타일을 강제로 리로드합니다.
@@ -587,6 +619,15 @@ extern NMF_EXPORT NSString *const NMF_LAYER_GROUP_AIRVIEW;
 @property(nonatomic) double animationDuration;
 @property(nonatomic) BOOL updateOnChange;
 - (NMCClusterer<KeyType> * _Nonnull)build;
+@end
+
+
+#pragma mark - Toast
+
+@interface NMFToastManager : NSObject
++ (instancetype)sharedInstance;
+- (void)presentWithMessage:(NSString *)message duration:(NSTimeInterval)interval completion:(nullable void (^)(void))completion;
+- (void)dismiss;
 @end
 
 NS_ASSUME_NONNULL_END

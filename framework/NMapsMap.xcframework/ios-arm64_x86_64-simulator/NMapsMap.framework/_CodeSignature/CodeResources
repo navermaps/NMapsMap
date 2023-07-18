@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		xGq/7Or0k+yL7jjRpU814Z0h76Y=
+		bryfupcpjQoFBeDdfyvK9cXVJ8M=
 		</data>
 		<key>Base.lproj/Foundation.strings</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>Headers/NMFMapView.h</key>
 		<data>
-		6qSQT9JVTw75v206U667DilzDRE=
+		05nOpLj0RUnJPm5uRC42PlipIpI=
 		</data>
 		<key>Headers/NMFMapViewCameraDelegate.h</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>Headers/NMFOfflineStorage.h</key>
 		<data>
-		LzHyMJ6R20k+6XVInJyd8aAjbLY=
+		T76hfchLrzqPge1XXkdu7sq/4lA=
 		</data>
 		<key>Headers/NMFOverlay.h</key>
 		<data>
@@ -230,11 +230,11 @@
 		</data>
 		<key>Headers/NSBundle+NMFAdditions.h</key>
 		<data>
-		O4jY930KCzMvovhvYzQQ0UXJx/o=
+		rW4WLpQueQiezb2mFu5dHnSPe9I=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		xlopExDsriJjCnsopWiU3tyMO30=
+		LrIOQn/oPauNIZL4pBv6vqF9cEc=
 		</data>
 		<key>LICENSE</key>
 		<data>
@@ -282,11 +282,11 @@
 		</data>
 		<key>NOTICE</key>
 		<data>
-		0+d+Z1FYzIkTqb6rsuCSsdSHnkc=
+		t/WoozCmep5AQwmmBNiS7k0lEQo=
 		</data>
 		<key>default.metallib</key>
 		<data>
-		ulLHyhUezKzGABC84QuOIfJybOc=
+		LsRP40yfuZqmhP+b12vxfi3MXnw=
 		</data>
 		<key>en.lproj/Foundation.strings</key>
 		<dict>
@@ -376,11 +376,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xGq/7Or0k+yL7jjRpU814Z0h76Y=
+			bryfupcpjQoFBeDdfyvK9cXVJ8M=
 			</data>
 			<key>hash2</key>
 			<data>
-			pXkK1Qb2Ouo/1cQRuy5pYXBeJdcf77MnryUmAApREw4=
+			1R32T8GkGj+uKOEGVkzZ9cB34DpO9EXBS+Oi3P4Vmg4=
 			</data>
 		</dict>
 		<key>Base.lproj/Foundation.strings</key>
@@ -662,11 +662,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6qSQT9JVTw75v206U667DilzDRE=
+			05nOpLj0RUnJPm5uRC42PlipIpI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Kjji+WOpp+q83vmwJEvCTuTQHNjIHAEQM0ZGJbWJhXc=
+			Vvhve3iTesWFRt0mB92xjnLAzrjMJ0HeSQkx8spV1vg=
 			</data>
 		</dict>
 		<key>Headers/NMFMapViewCameraDelegate.h</key>
@@ -794,11 +794,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LzHyMJ6R20k+6XVInJyd8aAjbLY=
+			T76hfchLrzqPge1XXkdu7sq/4lA=
 			</data>
 			<key>hash2</key>
 			<data>
-			rZFzLoxu2q2wQixCFylX68azi406iq8EDq8IX/iNMEY=
+			+khQhD/kWU/0KvRKIRvDGntZuLhG5/7+gp5KGuS+WOY=
 			</data>
 		</dict>
 		<key>Headers/NMFOverlay.h</key>
@@ -992,11 +992,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			O4jY930KCzMvovhvYzQQ0UXJx/o=
+			rW4WLpQueQiezb2mFu5dHnSPe9I=
 			</data>
 			<key>hash2</key>
 			<data>
-			evv+o67ExUOL/ZJL1iXKHGGjgcvFUmecNgcN3/4O55M=
+			K1PnjGWMZA8hT4dsprQl50iXo96atS4TDZV49bp4/PI=
 			</data>
 		</dict>
 		<key>LICENSE</key>
@@ -1124,22 +1124,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0+d+Z1FYzIkTqb6rsuCSsdSHnkc=
+			t/WoozCmep5AQwmmBNiS7k0lEQo=
 			</data>
 			<key>hash2</key>
 			<data>
-			wtWIpKCss0juxKU9saRy1E6jjZciMvjym/VPC3hiHUE=
+			Um25y8Rj2Tscm7X0kDhjXPCZXHKsE0eupciNFuKMrfk=
 			</data>
 		</dict>
 		<key>default.metallib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ulLHyhUezKzGABC84QuOIfJybOc=
+			LsRP40yfuZqmhP+b12vxfi3MXnw=
 			</data>
 			<key>hash2</key>
 			<data>
-			5ZWBmDvoNwm9tmciaaf5WxXrFYZ78rwhxAiAEumJgz8=
+			LDLfqgezyc1rQUQw9V7mqlDeR56jVf+kb4quhdUiFKs=
 			</data>
 		</dict>
 		<key>en.lproj/Foundation.strings</key>

@@ -345,6 +345,8 @@ NMF_EXPORT
 
 - (void)addPreloadDatabase:(NSString *)filePath
                   sourceId:(NSString *)sourceId
+             tileUrlPrefix:(NSString *)tileUrlPrefix
+               tileVersion:(NSString *)tileVersion
                    minZoom:(NSInteger)minzoom
                    maxZoom:(NSInteger)maxZoom
                     bounds:(NMGLatLngBounds *)bounds
@@ -352,6 +354,9 @@ NMF_EXPORT
 
 - (void)removePreloadDatabase:(NSString *)filePath
                    completion:(nullable NMFOfflinePackCompletionHandler)completion;
+
+- (void)setPreloadFallbackToStreaming:(BOOL)preloadFallbackToStreaming
+                           completion:(nullable NMFOfflinePackCompletionHandler)completion;
 
 /**
  The cumulative size, measured in bytes, of all downloaded resources on disk.

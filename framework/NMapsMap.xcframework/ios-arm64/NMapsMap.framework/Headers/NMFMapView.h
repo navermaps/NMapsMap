@@ -32,14 +32,18 @@ extern NMF_EXPORT UIColor *const NMFDefaultBackgroundLightColor;
 extern NMF_EXPORT UIColor *const NMFDefaultBackgroundDarkColor;
 
 /**
- 기본 밝은 배경 이미지.
+ 기본 밝은 배경 이미지. 지도 로딩 전에는 `nil`일 수 있습니다.
+ 
+ 이 속성은 더이상 사용이 권장되지 않습니다. 대신 `NMFMapView.defaultBackgroundLightImage`를 사용하세요.
  */
-extern NMF_EXPORT UIImage *const NMFDefaultBackgroundLightImage;
+extern NMF_EXPORT UIImage * _Nullable NMFDefaultBackgroundLightImage __attribute__((deprecated("Use NMFMapView.defaultBackgroundLightImage instead")));
 
 /**
- 기본 어두운 배경 이미지.
+ 기본 어두운 배경 이미지. 지도 로딩 전에는 `nil`일 수 있습니다.
+ 
+ 이 속성은 더이상 사용이 권장되지 않습니다. 대신 `NMFMapView.defaultBackgroundDarkImage`를 사용하세요.
  */
-extern NMF_EXPORT UIImage *const NMFDefaultBackgroundDarkImage;
+extern NMF_EXPORT UIImage * _Nullable NMFDefaultBackgroundDarkImage __attribute__((deprecated("Use NMFMapView.defaultBackgroundDarkImage instead")));
 
 /**
  건물 레이어 그룹. 기본적으로 활성화됩니다.
@@ -101,6 +105,16 @@ typedef NS_ENUM(NSInteger, NMFMapType) {
  */
 NMF_EXPORT IB_DESIGNABLE
 @interface NMFMapView : UIView
+
+/**
+ 기본 밝은 배경 이미지.
+ */
+@property (class, nonatomic, readonly, nullable) UIImage *defaultBackgroundLightImage;
+
+/**
+ 기본 어두운 배경 이미지.
+ */
+@property (class, nonatomic, readonly, nullable) UIImage *defaultBackgroundDarkImage;
 
 /**
  지도 인증 요청. 네트워크 오류 등의 이유로 인증을 재시도할 때 호출합니다.
@@ -334,6 +348,11 @@ typedef NS_ENUM(NSInteger, NMFLogoAlign) {
  */
 - (void)showOpenSourceLicense;
 
+/**
+ 지도 화면을 강제로 새로고침합니다. 실시간 교통정보 등 지도 화면에 나타나는 실시간성 데이터는 적시에 자동으로
+ 새로고침되므로 이 메서드를 별도로 호출할 필요가 없습니다.
+ */
+- (void)forceRefresh;
 
 /**
  지도가 렌더링되는 속도(fps, frames per second)를 설정합니다.

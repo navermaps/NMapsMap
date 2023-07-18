@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns the bundle containing the SDK’s classes and Info.plist file.
 + (instancetype)naverMapFrameworkBundle;
 
++ (nonnull NSString *)naverMapFrameworkVersion;
+
 + (nullable NSString *)naverMapFrameworkBundleIdentifier;
 
 + (nullable NSDictionary<NSString *, id> *)naverMapFrameworkInfoDictionary;
