@@ -343,17 +343,17 @@ NMF_EXPORT
 
 #pragma mark Preload Database
 
-- (void)addPreloadDatabase:(NSString *)filePath
-                  sourceId:(NSString *)sourceId
-             tileUrlPrefix:(NSString *)tileUrlPrefix
-               tileVersion:(NSString *)tileVersion
-                   minZoom:(NSInteger)minzoom
-                   maxZoom:(NSInteger)maxZoom
-                    bounds:(NMGLatLngBounds *)bounds
-                completion:(nullable NMFOfflinePackCompletionHandler)completion;
+- (void)addPreloadTile:(NSString *)filePath
+              sourceId:(NSString *)sourceId
+         tileUrlPrefix:(NSString *)tileUrlPrefix
+           tileVersion:(NSString *)tileVersion
+               minZoom:(NSInteger)minzoom
+               maxZoom:(NSInteger)maxZoom
+                bounds:(NMGLatLngBounds *)bounds
+            completion:(nullable NMFOfflinePackCompletionHandler)completion;
 
-- (void)removePreloadDatabase:(NSString *)filePath
-                   completion:(nullable NMFOfflinePackCompletionHandler)completion;
+- (void)removePreloadTile:(NSString *)filePath
+               completion:(nullable NMFOfflinePackCompletionHandler)completion;
 
 - (void)setPreloadFallbackToStreaming:(BOOL)preloadFallbackToStreaming
                            completion:(nullable NMFOfflinePackCompletionHandler)completion;

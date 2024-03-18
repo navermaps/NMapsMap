@@ -30,15 +30,15 @@ extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLUE;
  */
 extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GRAY;
 /**
- 초록색 마커 이미지.
+ 녹색 마커 이미지.
  */
 extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_GREEN;
 /**
- 밝은파란색 마커 이미지.
+ 하늘색 마커 이미지.
  */
 extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_LIGHTBLUE;
 /**
- 핑크색 마커 이미지.
+ 분홍색 마커 이미지.
  */
 extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_PINK;
 /**
@@ -53,6 +53,30 @@ extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_YELLOW;
  검은색 마커 이미지. 색상을 덧입히기에 적합합니다.
  */
 extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_BLACK;
+/**
+ 기본 마커 이미지. `NMF_MARKER_IMAGE_GREEN`과 동일합니다.
+ */
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_DEFAULT;
+
+/**
+ 저밀도 클러스터 마커 이미지.
+ */
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_CLUSTER_LOW_DENSITY;
+/**
+ 중밀도 클러스터 마커 이미지.
+ */
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_CLUSTER_MEDIUM_DENSITY;
+/**
+ 고밀도 클러스터 마커 이미지.
+ */
+extern NMF_EXPORT NMFOverlayImage *NMF_MARKER_IMAGE_CLUSTER_HIGH_DENSITY;
+
+/**
+ 기본 앵커. 가운데 아래를 가리킵니다.
+ 
+ @see `NMFMarker.anchor`
+ */
+extern const NMF_EXPORT CGPoint NMF_MARKER_ANCHOR_DEFAULT;
 
 /**
  아이콘과 캡션을 이용해 지도 위의 한 지점을 표시하는 오버레이.

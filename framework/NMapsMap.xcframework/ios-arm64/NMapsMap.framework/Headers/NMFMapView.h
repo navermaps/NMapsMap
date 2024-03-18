@@ -97,7 +97,9 @@ typedef NS_ENUM(NSInteger, NMFMapType) {
     /** 지형도. */
     NMFMapTypeTerrain,
     /** 없음. 지도는 나타나지 않고 오버레이만이 나타납니다. */
-    NMFMapTypeNone
+    NMFMapTypeNone,
+    /** 내비게이션용 위성 지도(겹쳐보기). */
+    NMFMapTypeNaviHybrid
 };
 
 /**
